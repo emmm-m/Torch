@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Torch</string>
+
+    <string name="home">主页</string>
+    <string name="information">资讯</string>
+    <string name="measurement">测评</string>
+    <string name="appointment">预约</string>
+    <string name="mine">我的</string>
+</resources>

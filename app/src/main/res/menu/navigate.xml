@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@mipmap/home"
+        android:title="@string/home" />
+    <item
+        android:id="@+id/navigation_information"
+        android:icon="@mipmap/information"
+        android:title="@string/information" />
+    <item
+        android:id="@+id/navigation_measurement"
+        android:icon="@mipmap/measurement"
+        android:title="@string/measurement" />
+    <item
+        android:id="@+id/navigation_appointment"
+        android:icon="@mipmap/appointment"
+        android:title="@string/appointment" />
+    <item
+        android:id="@+id/navigation_mine"
+        android:icon="@mipmap/mine"
+        android:title="@string/mine" />
+</menu>
