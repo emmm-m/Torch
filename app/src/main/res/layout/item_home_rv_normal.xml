@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="90dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/item_home_rv_normal_imageView"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="25dp"
+        android:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/item_home_rv_normal_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/item_home_rv_normal_imageView"
+        android:layout_toRightOf="@id/item_home_rv_normal_imageView"
+        android:text="Mr.Li"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/item_home_rv_normal_introduce"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/item_home_rv_normal_name"
+        android:layout_toRightOf="@id/item_home_rv_normal_imageView"
+        android:text="教龄8年|已授536课" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/item_home_rv_normal_imageView"
+        android:layout_toRightOf="@id/item_home_rv_normal_imageView"
+        android:text="⭐️⭐⭐⭐⭐" />
+
+    <TextView
+        android:id="@+id/item_home_rv_normal_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@id/item_home_rv_normal_imageView"
+        android:layout_marginRight="5dp"
+        android:text="南岸区" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/item_home_rv_normal_imageView"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp"
+        android:text="100元/小时"
+        android:textColor="@color/red"
+        android:textSize="20sp" />
+</RelativeLayout>

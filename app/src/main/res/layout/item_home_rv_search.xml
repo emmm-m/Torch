@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:gravity="bottom"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/item_home_rv_search_location"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:gravity="center"
+        android:text="重庆"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/item_home_rv_search_editText"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom"
+        android:layout_margin="5dp"
+        android:layout_weight="1"
+        android:hint="搜索老师" />
+
+    <ImageView
+        android:id="@+id/item_home_rv_search_imageView"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:src="@mipmap/message_red" />
+</LinearLayout>
