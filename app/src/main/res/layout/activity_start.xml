@@ -6,11 +6,10 @@
     tools:context=".view.StartActivity">
 
     <ImageView
+        android:id="@+id/splash"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@mipmap/pic_start"
         android:scaleType="centerCrop"
-        >
+        android:src="@mipmap/pic_start" />
 
-    </ImageView>
 </FrameLayout>

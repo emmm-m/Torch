@@ -17,7 +17,7 @@ class StartActivity : AppCompatActivity() {
         setContentView(R.layout.activity_start)
         Thread(Runnable {
             try {
-                Thread.sleep(3000)
+                Thread.sleep(500)
             } catch (e: InterruptedException) {
                 e.printStackTrace()
             }

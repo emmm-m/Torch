@@ -19,6 +19,11 @@ class HomeRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val ADJUST = 2
     private val CLASSIFY = 3
     private val NORMAL = 4
+    private var views = ArrayList<View>()
+
+    public fun setGalleryViews(list: ArrayList<View>) {
+        this.views = list
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         var view: View? = null
@@ -52,7 +57,7 @@ class HomeRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         if (holder is SearchHolder) {
             holder.location.text = "重庆"
         } else if (holder is GallaryHolder) {
-
+            holder.viewPager.setViews(views, holder.pagerCircle)
         } else if (holder is AdjustHolder) {
 
         } else if (holder is ClassifyHolder) {
@@ -63,7 +68,7 @@ class HomeRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return 10
+        return 30
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -77,18 +82,14 @@ class HomeRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     class SearchHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var location: TextView
-        var editText: EditText
-        var imageView: ImageView
-        init {
-            location = itemView.findViewById(R.id.item_home_rv_search_location)
-            editText = itemView.findViewById(R.id.item_home_rv_search_editText)
-            imageView = itemView.findViewById(R.id.item_home_rv_search_imageView)
-        }
+        var location: TextView = itemView.findViewById(R.id.item_home_rv_search_location)
+        var editText: EditText = itemView.findViewById(R.id.item_home_rv_search_editText)
+        var imageView: ImageView = itemView.findViewById(R.id.item_home_rv_search_imageView)
     }
 
-    class GallaryHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-
+    class GallaryHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var viewPager: GalleryPager = itemView.findViewById(R.id.item_home_rv_gallary_viewPager)
+        val pagerCircle: PagerCircle = itemView.findViewById(R.id.item_home_rv_gallary_pagerCircle)
     }
 
     class AdjustHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
