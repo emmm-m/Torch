@@ -8,6 +8,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import com.bucai.torch.R
+import com.jude.rollviewpager.RollPagerView
 
 /**
  * Created by zia on 2018/5/25.
@@ -54,16 +55,20 @@ class HomeRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (holder is SearchHolder) {
-            holder.location.text = "重庆"
-        } else if (holder is GallaryHolder) {
-            holder.viewPager.setViews(views, holder.pagerCircle)
-        } else if (holder is AdjustHolder) {
+        when (holder) {
+            is SearchHolder -> holder.location.text = "重庆"
+            is GallaryHolder -> {
+//            holder.viewPager.setViews(views, holder.pagerCircle)
+            }
+            is AdjustHolder -> {
 
-        } else if (holder is ClassifyHolder) {
+            }
+            is ClassifyHolder -> {
 
-        } else {
+            }
+            else -> {
 
+            }
         }
     }
 
@@ -88,8 +93,8 @@ class HomeRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     class GallaryHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var viewPager: GalleryPager = itemView.findViewById(R.id.item_home_rv_gallary_viewPager)
-        val pagerCircle: PagerCircle = itemView.findViewById(R.id.item_home_rv_gallary_pagerCircle)
+        var viewPager: RollPagerView = itemView.findViewById(R.id.item_home_rv_gallary_viewPager)
+//        val pagerCircle: PagerCircle = itemView.findViewById(R.id.item_home_rv_gallary_pagerCircle)
     }
 
     class AdjustHolder(itemView: View) : RecyclerView.ViewHolder(itemView)

@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="150dp"
-    android:background="@color/colorAccent">
+             android:layout_width="match_parent"
+             android:layout_height="200dp"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:background="@color/colorAccent">
 
-    <com.bucai.torch.view.main.home.GalleryPager
+    <com.jude.rollviewpager.RollPagerView
         android:id="@+id/item_home_rv_gallary_viewPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        app:rollviewpager_play_delay="3000"/>
 
-    <com.bucai.torch.view.main.home.PagerCircle
-        android:id="@+id/item_home_rv_gallary_pagerCircle"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    <!--<com.bucai.torch.view.main.home.PagerCircle-->
+        <!--android:id="@+id/item_home_rv_gallary_pagerCircle"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent" />-->
 
 </FrameLayout>

@@ -22,6 +22,11 @@ import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
+
+    companion object {
+        var USER : String? = null
+    }
+
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
         val count = intent!!.getIntExtra("count", 0)

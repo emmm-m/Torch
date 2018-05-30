@@ -44,6 +44,6 @@ class HomeFragment : Fragment() {
         val imageView3 = ImageView(context)
         imageView3.setBackgroundColor(Color.BLACK)
         list.add(imageView3)
-        adapter.setGalleryViews(list)
+//        adapter.setGalleryViews(list)
     }
 }

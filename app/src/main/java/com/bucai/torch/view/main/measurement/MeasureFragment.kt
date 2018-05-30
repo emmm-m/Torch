@@ -21,5 +21,4 @@ class MeasureFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_measure, container, false)
     }
 
-
 }

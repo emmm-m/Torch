@@ -66,7 +66,7 @@ public class GalleryPager extends ViewPager {
                         public void run() {
                             setCurrentItem(currentShowingPosition);
                             pagerCircle.setCurrentPosition(currentShowingPosition, adapter.getCount());
-//                            invalidate();//mdzz，这居然不行
+                            invalidate();//mdzz，这居然不行
                         }
                     });
                     try {
@@ -92,15 +92,16 @@ public class GalleryPager extends ViewPager {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-//        int curY = getHeight() / 5 * 4;
-//        int circleSize = adapter.getCount();
-//        int totalWidth = circleSize * radius * 2 + space * (circleSize - 1);
-//        int curX = (getWidth() - totalWidth) / 2;
-//        for (int i = 0; i < circleSize; i++) {
-//            canvas.drawCircle(curX + radius, curY, radius, paint);
-//            curX = curX + radius * 2 + space;
-//            Log.e(TAG, "curX:" + curX);
-//        }
+        int curY = getHeight() / 5 * 4;
+        int circleSize = adapter.getCount();
+        int totalWidth = circleSize * radius * 2 + space * (circleSize - 1);
+        int curX = (getWidth() - totalWidth) / 2;
+        for (int i = 0; i < circleSize; i++) {
+            canvas.drawCircle(curX + radius, curY, radius, paint);
+            curX = curX + radius * 2 + space;
+            Log.e(TAG, "curX:" + curX);
+        }
+
 
     }
 
