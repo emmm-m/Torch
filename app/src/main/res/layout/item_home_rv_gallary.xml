@@ -9,6 +9,7 @@
         android:id="@+id/item_home_rv_gallary_viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         app:rollviewpager_play_delay="3000"/>
 
     <!--<com.bucai.torch.view.main.home.PagerCircle-->

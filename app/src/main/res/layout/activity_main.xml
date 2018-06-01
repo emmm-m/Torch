@@ -13,7 +13,7 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <com.bucai.torch.util.BottomNavigationViewEx
+    <com.bucai.torch.util.uiutils.BottomNavigationViewEx
         android:id="@+id/bnve"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

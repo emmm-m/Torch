@@ -1,4 +1,4 @@
-package com.bucai.torch.util;
+package com.bucai.torch.util.uiutils;
 
 import android.content.Context;
 import android.content.res.ColorStateList;

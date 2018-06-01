@@ -14,6 +14,8 @@
     <dimen name="app_text_size_medium">14sp</dimen>
     <dimen name="app_text_size_large">18sp</dimen>
     <dimen name="app_text_size_xlarge">20sp</dimen>
+    <dimen name="app_text_size_xxlarge">25sp</dimen>
+    <dimen name="app_text_size_xxxlarge">30sp</dimen>
     <dimen name="app_text_size_diff_large_small">6sp</dimen>
 
     <!--fab-->
