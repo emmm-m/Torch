@@ -47,9 +47,9 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.jude:rollviewpager:1.4.6'
     // LeanCloud 基础包
-    implementation ('cn.leancloud.android:avoscloud-sdk:v4.6.4')
+    implementation('cn.leancloud.android:avoscloud-sdk:v4.6.4')
     // 推送与实时聊天需要的包
-    implementation ('cn.leancloud.android:avoscloud-push:v4.6.4@aar') { transitive = true }
+    implementation('cn.leancloud.android:avoscloud-push:v4.6.4@aar') { transitive = true }
     // LeanCloud 统计包
-    implementation ('cn.leancloud.android:avoscloud-statistics:v4.6.4')
+    implementation('cn.leancloud.android:avoscloud-statistics:v4.6.4')
 }

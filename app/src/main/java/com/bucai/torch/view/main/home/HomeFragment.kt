@@ -11,6 +11,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 
 import com.bucai.torch.R
+import com.bucai.torch.util.model.GetDataModel
+import com.bucai.torch.util.model.IGetDataModel
 import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
@@ -19,6 +21,8 @@ import kotlinx.android.synthetic.main.fragment_home.*
 class HomeFragment : Fragment() {
 
     private lateinit var adapter: HomeRvAdapter
+    private val model: IGetDataModel = GetDataModel()
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -44,6 +48,7 @@ class HomeFragment : Fragment() {
         val imageView3 = ImageView(context)
         imageView3.setBackgroundColor(Color.BLACK)
         list.add(imageView3)
-//        adapter.setGalleryViews(list)
+        adapter.setGalleryViews(list)
     }
+
 }

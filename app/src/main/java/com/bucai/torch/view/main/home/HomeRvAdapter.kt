@@ -1,13 +1,18 @@
 package com.bucai.torch.view.main.home
 
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import com.avos.avoscloud.AVException
+import com.avos.avoscloud.AVObject
 import com.bucai.torch.R
+import com.bucai.torch.util.model.GetDataModel
+import com.bucai.torch.util.model.IGetDataModel
 import com.jude.rollviewpager.RollPagerView
 
 /**
@@ -21,8 +26,9 @@ class HomeRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val CLASSIFY = 3
     private val NORMAL = 4
     private var views = ArrayList<View>()
+    private val getDataModel: IGetDataModel = GetDataModel()
 
-    public fun setGalleryViews(list: ArrayList<View>) {
+    fun setGalleryViews(list: ArrayList<View>) {
         this.views = list
     }
 
@@ -58,7 +64,19 @@ class HomeRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         when (holder) {
             is SearchHolder -> holder.location.text = "重庆"
             is GallaryHolder -> {
-//            holder.viewPager.setViews(views, holder.pagerCircle)
+                getDataModel.getRollPics(object : GetDataModel.GetDataListener<AVObject>{
+                    override fun onStart() {
+//                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    }
+
+                    override fun onError(e: AVException?) {
+                        Log.d("MPtest", e.toString())
+                    }
+
+                    override fun onFinish(list: MutableList<AVObject>?) {
+                        holder.viewPager.setAdapter(RollPicsAdapter(list))                    }
+                })
+
             }
             is AdjustHolder -> {
 

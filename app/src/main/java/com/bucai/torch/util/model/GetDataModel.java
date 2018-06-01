@@ -185,7 +185,7 @@ public class GetDataModel implements IGetDataModel {
     @Override
     public void getRollPics(final GetDataListener<AVObject> listener) {
         listener.onStart();
-        AVQuery<AVObject> query = new AVQuery<>("RollPics");
+        AVQuery<AVObject> query = new AVQuery<>("News");
         query.orderByAscending("createdAt");
         query.findInBackground(new FindCallback<AVObject>() {
             @Override

@@ -1,15 +1,14 @@
 package com.bucai.torch.view.main
 
 import android.content.Intent
-import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
-import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import com.bucai.torch.R
 import com.bucai.torch.util.SharedPreferencesUtils
 import com.bucai.torch.view.EvaluatePrepareActivity
+import com.bucai.torch.view.base.BaseActivity
 import com.bucai.torch.view.main.appointment.AppointFragment
 import com.bucai.torch.view.main.home.HomeFragment
 import com.bucai.torch.view.main.information.InformationFragment
@@ -21,7 +20,14 @@ import q.rorbin.badgeview.QBadgeView
 import java.util.*
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
+    override val contentViewId: Int = R.layout.activity_main
+
+    override fun initData() {
+        val adapter = MyPagerAdapter(supportFragmentManager)
+        main_viewPager.adapter = adapter
+        setBottomNavigate()
+        setEvaluate()    }
 
     companion object {
         var USER : String? = null
@@ -33,15 +39,6 @@ class MainActivity : AppCompatActivity() {
         main_viewPager.currentItem = count
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        val adapter = MyPagerAdapter(supportFragmentManager)
-        main_viewPager.adapter = adapter
-        setBottomNavigate()
-        setEvaluate()
-
-    }
 
     private fun setEvaluate() {
         if(SharedPreferencesUtils.getParam(this, "hasEvaluated", false) == false)
