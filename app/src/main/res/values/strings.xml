@@ -6,4 +6,9 @@
     <string name="measurement">测评</string>
     <string name="appointment">预约</string>
     <string name="mine">我的</string>
+    <string name="measure_title">测一测你的抑郁、焦虑与压力水平</string>
+    <string name="measure_table">[DASS-21]抑郁、焦虑和压力测评量表</string>
+    <string name="measure_what">· 测什么 ·</string>
+    <string name="measure_attr">自出生起，情绪便时时刻刻伴随着我们的一举一动正是因为他太常见，所以经常被我们忽略.....</string>
+    <string name="search">搜索</string>
 </resources>
