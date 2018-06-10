@@ -1,6 +1,7 @@
 package com.bucai.torch.view.main.appointment
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -56,6 +57,10 @@ class AppointFragment : Fragment() {
         }
 
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+            holder.itemView.setOnClickListener {
+                holder.itemView.context.startActivity(
+                        Intent(holder.itemView.context, TeaInfoActivity::class.java))
+            }
         }
 
         class HeadHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

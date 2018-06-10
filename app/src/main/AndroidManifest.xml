@@ -28,8 +28,9 @@
             android:launchMode="singleTask"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity android:name=".view.EvaluatePrepareActivity" />
-        <activity android:name=".view.WebActivity"></activity>
-        <activity android:name=".view.main.measurement.MeasureDetailActivity"></activity>
+        <activity android:name=".view.WebActivity" />
+        <activity android:name=".view.main.measurement.MeasureDetailActivity" />
+        <activity android:name=".view.main.appointment.TeaInfoActivity"></activity>
     </application>
 
 </manifest>
