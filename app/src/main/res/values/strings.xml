@@ -11,4 +11,7 @@
     <string name="measure_what">· 测什么 ·</string>
     <string name="measure_attr">自出生起，情绪便时时刻刻伴随着我们的一举一动正是因为他太常见，所以经常被我们忽略.....</string>
     <string name="search">搜索</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
