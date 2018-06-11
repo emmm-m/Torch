@@ -185,7 +185,24 @@ public class GetDataModel implements IGetDataModel {
     @Override
     public void getRollPics(final GetDataListener<AVObject> listener) {
         listener.onStart();
-        AVQuery<AVObject> query = new AVQuery<>("News");
+        AVQuery<AVObject> query = new AVQuery<>("InfoCzjy");
+        query.orderByAscending("createdAt");
+        query.findInBackground(new FindCallback<AVObject>() {
+            @Override
+            public void done(List<AVObject> list, AVException e) {
+                if (e == null) {
+                    listener.onFinish(list);
+                } else {
+                    listener.onError(e);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void getData(String dataType, final GetDataListener<AVObject> listener) {
+        listener.onStart();
+        AVQuery<AVObject> query = new AVQuery<>(dataType);
         query.orderByAscending("createdAt");
         query.findInBackground(new FindCallback<AVObject>() {
             @Override

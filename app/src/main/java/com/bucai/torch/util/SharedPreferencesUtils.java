@@ -60,24 +60,29 @@ public class SharedPreferencesUtils {
      * @param defaultObject
      * @return
      */
-    public static Object getParam(Context context , String key, Object defaultObject){
+    @SuppressWarnings("unchecked")
+    public static <T>T getParam(Context context , String key, T defaultObject){
         String type = defaultObject.getClass().getSimpleName();
         SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
 
         if("String".equals(type)){
-            return sp.getString(key, (String)defaultObject);
+            return (T) sp.getString(key, (String)defaultObject);
         }
         else if("Integer".equals(type)){
-            return sp.getInt(key, (Integer)defaultObject);
+            Integer tem = sp.getInt(key, (Integer) defaultObject);
+            return (T)tem;
         }
         else if("Boolean".equals(type)){
-            return sp.getBoolean(key, (Boolean)defaultObject);
+            Boolean tem = sp.getBoolean(key, (Boolean)defaultObject);
+            return (T)tem;
         }
         else if("Float".equals(type)){
-            return sp.getFloat(key, (Float)defaultObject);
+            Float tem = sp.getFloat(key, (Float)defaultObject);
+            return (T)tem;
         }
         else if("Long".equals(type)){
-            return sp.getLong(key, (Long)defaultObject);
+            Long tem = sp.getLong(key, (Long)defaultObject);
+            return (T)tem;
         }
 
         return null;

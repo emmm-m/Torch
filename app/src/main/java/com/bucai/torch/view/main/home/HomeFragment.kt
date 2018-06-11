@@ -5,10 +5,12 @@ import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 
 import com.bucai.torch.R
 import com.bucai.torch.util.model.GetDataModel
@@ -28,6 +30,9 @@ class HomeFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
+
+
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -51,4 +56,12 @@ class HomeFragment : Fragment() {
         adapter.setGalleryViews(list)
     }
 
+}
+
+fun Fragment.log(str: String) {
+    Log.d(activity.toString() + "Test", str)
+}
+
+fun Fragment.toast(str: String) {
+    Toast.makeText(activity, str, Toast.LENGTH_SHORT).show()
 }

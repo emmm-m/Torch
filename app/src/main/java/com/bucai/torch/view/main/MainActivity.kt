@@ -27,7 +27,8 @@ class MainActivity : BaseActivity() {
         val adapter = MyPagerAdapter(supportFragmentManager)
         main_viewPager.adapter = adapter
         setBottomNavigate()
-        setEvaluate()    }
+        setEvaluate()
+    }
 
     companion object {
         var USER : String? = null
@@ -41,7 +42,7 @@ class MainActivity : BaseActivity() {
 
 
     private fun setEvaluate() {
-        if(SharedPreferencesUtils.getParam(this, "hasEvaluated", false) == false)
+        if(SharedPreferencesUtils.getParam(this, "hasEvaluated", false))
             startActivity(Intent(this@MainActivity, EvaluatePrepareActivity::class.java))
     }
 
