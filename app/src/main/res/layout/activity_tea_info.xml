@@ -1,266 +1,357 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".view.main.appointment.TeaInfoActivity">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:elevation="5dp">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/tea_info_circleImage"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_margin="15dp"
-                android:src="@mipmap/ic_launcher" />
-
-            <TextView
-                android:id="@+id/tea_info_name"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_alignTop="@id/tea_info_circleImage"
-                android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@id/tea_info_circleImage"
-                android:text="Mr.Li"
-                android:textSize="22sp"
-                android:textStyle="bold" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_alignTop="@id/tea_info_name"
-                android:layout_marginLeft="30dp"
-                android:layout_toRightOf="@id/tea_info_name"
-                android:src="@mipmap/message" />
-
-            <ImageView
-                android:id="@+id/tea_info_ic_location"
-                android:layout_width="10dp"
-                android:layout_height="10dp"
-                android:layout_alignLeft="@id/tea_info_name"
-                android:layout_below="@id/tea_info_name"
-                android:layout_marginLeft="3dp"
-                android:layout_marginTop="10dp"
-                android:src="@drawable/badge" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@id/tea_info_ic_location"
-                android:layout_below="@id/tea_info_name"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="6dp"
-                android:layout_toRightOf="@id/tea_info_ic_location"
-                android:text="南岸区" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@id/tea_info_ic_location"
-                android:layout_below="@id/tea_info_ic_location"
-                android:layout_marginTop="15dp"
-                android:text="100元/小时"
-                android:textColor="#DF7B53"
-                android:textSize="18sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/tea_info_circleImage"
-                android:layout_marginRight="5dp"
-                android:text="⭐️收藏"
-                android:textColor="#C9C9C9" />
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:elevation="5dp"
-            android:orientation="horizontal"
-            android:padding="10dp">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="问答"
-                    android:textColor="#7E7E7E"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="12"
-                    android:textColor="#000000" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="#EAEAEA" />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="文章"
-                    android:textColor="#7E7E7E"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="43"
-                    android:textColor="#000000" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="#EAEAEA" />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="视频"
-                    android:textColor="#7E7E7E"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="2"
-                    android:textColor="#000000" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:layout_marginTop="20dp"
             android:orientation="vertical">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:elevation="2dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/tea_info_circleImage"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_margin="15dp"
+                    android:src="@mipmap/ic_launcher" />
+
+                <TextView
+                    android:id="@+id/tea_info_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/tea_info_circleImage"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@id/tea_info_circleImage"
+                    android:text="Mr.Li"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@id/tea_info_name"
+                    android:layout_marginLeft="30dp"
+                    android:layout_toRightOf="@id/tea_info_name"
+                    android:src="@mipmap/vertify" />
+
+                <ImageView
+                    android:id="@+id/tea_info_ic_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/tea_info_name"
+                    android:layout_below="@id/tea_info_name"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginTop="8dp"
+                    android:src="@mipmap/location" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@id/tea_info_ic_location"
+                    android:layout_below="@id/tea_info_name"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_toRightOf="@id/tea_info_ic_location"
+                    android:text="南岸区" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/tea_info_ic_location"
+                    android:layout_below="@id/tea_info_ic_location"
+                    android:layout_marginTop="10dp"
+                    android:text="100元/小时"
+                    android:textColor="#DF7B53"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tea_info_favorite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/tea_info_circleImage"
+                    android:layout_marginRight="10dp"
+                    android:gravity="top"
+                    android:text="️收藏"
+                    android:textColor="#C9C9C9" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/tea_info_favorite"
+                    android:layout_toLeftOf="@id/tea_info_favorite"
+                    android:src="@mipmap/star" />
+            </RelativeLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:background="#ffffff"
+                android:elevation="2dp"
+                android:orientation="horizontal"
+                android:padding="10dp">
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:paddingLeft="30dp"
-                    android:paddingRight="30dp">
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
                         android:gravity="center"
-                        android:text="个人简介"
-                        android:textColor="#DD7049"
-                        android:textSize="22sp"
-                        android:textStyle="bold" />
+                        android:text="问答"
+                        android:textColor="#7E7E7E"
+                        android:textSize="18sp" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="3dp"
-                        android:background="#DD7049" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="12"
+                        android:textColor="#000000" />
                 </LinearLayout>
 
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="#EAEAEA" />
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:paddingLeft="30dp"
-                    android:paddingRight="30dp">
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
                         android:gravity="center"
-                        android:text="预约时段"
-                        android:textColor="#808080"
-                        android:textSize="22sp"
-                        android:textStyle="bold" />
+                        android:text="文章"
+                        android:textColor="#7E7E7E"
+                        android:textSize="18sp" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="3dp"
-                        android:background="#DD7049"
-                        android:visibility="gone" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="43"
+                        android:textColor="#000000" />
                 </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="#EAEAEA" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="视频"
+                        android:textColor="#7E7E7E"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="2"
+                        android:textColor="#000000" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="#ffffff"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:paddingLeft="30dp"
+                        android:paddingRight="30dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:gravity="center"
+                            android:text="个人简介"
+                            android:textColor="#DD7049"
+                            android:textSize="22sp"
+                            android:textStyle="bold" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="3dp"
+                            android:background="#DD7049" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:paddingLeft="30dp"
+                        android:paddingRight="30dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:gravity="center"
+                            android:text="预约时段"
+                            android:textColor="#808080"
+                            android:textSize="22sp"
+                            android:textStyle="bold" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="3dp"
+                            android:background="#DD7049"
+                            android:visibility="gone" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <com.bucai.torch.util.uiutils.ClassifyGroup
+                    android:id="@+id/tea_info_classifyGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginTop="20dp" />
+
             </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="60dp" />
+                android:layout_height="wrap_content"
+                android:background="#F0F0F0"
+                android:gravity="center"
+                android:padding="2dp"
+                android:text="个人介绍"
+                android:textColor="#DE7652"
+                android:textSize="20sp" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:padding="15dp"
+                android:text="    北京大学《精神病与精神卫生学》心理咨询研究方向硕士研究生毕业。曾先后参加过北京大学举办的“全国心理治疗师强化班”系统培训;德中心理治疗研究院举办的为期三年的“德中高级家庭治疗师连续培训项目”;德中心理治疗研究院举办的为期三年的“精神分析治疗师连续培训项目”接受过家族系统排列、萨提亚家庭治疗专业课程系统训练;婚姻家庭治疗小组系统训练;欧文亚隆(Irvin Yalom, M.D.)团体心理咨询与治疗体系连续培训项目专业训练;国际音乐治疗与心理剧培训;箱庭疗法培训;创伤与危机干预实操技能训练;叙事治疗技术及焦点治疗技术的专业训练;NLP简快身心积极疗法培训;催眠与心理咨询意象对话技术训练; EAP企业员工心理辅导课程;接受过小组督导和自我体验。"
+                android:textColor="#888888" />
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="#F5F3F5"
+        android:gravity="right"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ask" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="如何预约"
+                android:textSize="12sp" />
         </LinearLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#F0F0F0"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
             android:gravity="center"
-            android:padding="5dp"
-            android:text="个人介绍"
-            android:textColor="#DE7652"
-            android:textSize="20sp" />
+            android:orientation="vertical">
 
-        <TextView
-            android:padding="10dp"
-            android:textColor="#888888"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="北京大学《精神病与精神卫生学》心理咨询研究方向硕士研究生毕业。曾先后参加过北京大学举办的“全国心理治疗师强化班”系统培训;德中心理治疗研究院举办的为期三年的“德中高级家庭治疗师连续培训项目”;德中心理治疗研究院举办的为期三年的“精神分析治疗师连续培训项目”接受过家族系统排列、萨提亚家庭治疗专业课程系统训练;婚姻家庭治疗小组系统训练;欧文亚隆(Irvin Yalom, M.D.)团体心理咨询与治疗体系连续培训项目专业训练;国际音乐治疗与心理剧培训;箱庭疗法培训;创伤与危机干预实操技能训练;叙事治疗技术及焦点治疗技术的专业训练;NLP简快身心积极疗法培训;催眠与心理咨询意象对话技术训练; EAP企业员工心理辅导课程;接受过小组督导和自我体验。" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/star" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="收藏TA"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:background="@mipmap/tea_info_bt_bg">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:src="@mipmap/tea_info_bt_circle" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:text="预约咨询"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+        </LinearLayout>
     </LinearLayout>
-</ScrollView>
+</LinearLayout>
