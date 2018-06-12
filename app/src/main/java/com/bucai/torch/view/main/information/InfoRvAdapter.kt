@@ -58,4 +58,6 @@ class InfoRvAdapter(var newsData: MutableList<AVObject>, val mContext: Context) 
         var date: TextView = itemView.findViewById(R.id.date_item_info)
         var pic: MyImageView = itemView.findViewById(R.id.pic_item_info)
     }
+
+
 }
