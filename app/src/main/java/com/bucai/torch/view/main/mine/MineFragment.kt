@@ -1,19 +1,18 @@
 package com.bucai.torch.view.main.mine
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.avos.avoscloud.AVException
 import com.avos.avoscloud.AVObject
-import com.avos.avoscloud.FindCallback
+import com.avos.avoscloud.AVUser
 import com.avos.avoscloud.SaveCallback
 import com.bucai.torch.R
 import com.bucai.torch.bean.FreeTime
-import com.bucai.torch.bean.Teacher
-import com.bucai.torch.util.model.GetDataModel
+import com.bucai.torch.view.login.LoginActivity
 import kotlinx.android.synthetic.main.fragment_mine.*
 
 /**
