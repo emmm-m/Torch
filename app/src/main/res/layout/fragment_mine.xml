@@ -4,8 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
     tools:context=".view.main.mine.MineFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/orange"
+        android:gravity="center"
+        android:paddingTop="20dp"
+        android:text="Torch"
+        android:textColor="@color/white"
+        android:textSize="@dimen/app_text_size_xxxlarge"
+        android:textStyle="italic|bold"/>
 
     <Button
         android:id="@+id/mine_send"
@@ -18,7 +28,7 @@
         android:id="@+id/mine_get"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_gravity="center"
         android:text="get" />
 
 </LinearLayout>
