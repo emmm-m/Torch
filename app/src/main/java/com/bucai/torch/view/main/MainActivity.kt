@@ -4,6 +4,7 @@ import android.content.Intent
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
+import android.view.ViewGroup
 import android.widget.Toast
 import com.bucai.torch.R
 import com.bucai.torch.util.SharedPreferencesUtils
@@ -92,6 +93,10 @@ class MainActivity : BaseActivity() {
 
         override fun getPageTitle(position: Int): CharSequence? {
             return titles[position]
+        }
+
+        override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
+//            super.destroyItem(container, position, `object`)
         }
     }
 }

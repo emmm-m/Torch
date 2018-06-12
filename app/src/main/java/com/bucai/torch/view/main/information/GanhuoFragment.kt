@@ -1,6 +1,7 @@
 package com.bucai.torch.view.main.information
 
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -28,6 +29,11 @@ class GanhuoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setList()
+    }
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
         setList()
     }
 

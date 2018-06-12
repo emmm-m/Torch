@@ -3,6 +3,7 @@ package com.bucai.torch.view.main.information
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
+import android.view.ViewGroup
 
 /**
  * Created by zxzhu
@@ -21,5 +22,9 @@ class InfoVpAdapter(private val fm: FragmentManager) : FragmentStatePagerAdapter
     override fun getPageTitle(position: Int): CharSequence? {
         return if (position == 0) "成长教育"
         else "干货分享"
+    }
+
+    override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
+//        super.destroyItem(container, position, `object`)
     }
 }

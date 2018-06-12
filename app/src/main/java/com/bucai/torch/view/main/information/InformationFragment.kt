@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import com.bucai.torch.R
 import kotlinx.android.synthetic.main.fragment_information.*
 
@@ -29,4 +28,5 @@ class InformationFragment : Fragment() {
         tab_fragment_news.tabMode = TabLayout.MODE_FIXED
         tab_fragment_news.setupWithViewPager(vp_fragment_news)
     }
+
 }
