@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.view.ViewGroup
 import android.widget.Toast
+import com.avos.avoscloud.AVUser
 import com.bucai.torch.R
 import com.bucai.torch.util.SharedPreferencesUtils
 import com.bucai.torch.view.EvaluatePrepareActivity
@@ -32,7 +33,7 @@ class MainActivity : BaseActivity() {
     }
 
     companion object {
-        var USER : String? = null
+        var USER : String? = AVUser.getCurrentUser().username
     }
 
     override fun onNewIntent(intent: Intent?) {

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.login.LoginActivity">
+
+    <TextView
+        android:id="@+id/tx_tittle"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:paddingTop="20dp"
+        android:text="登录"
+        android:textSize="@dimen/app_text_size_xlarge"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/md_grey_500"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:paddingTop="30dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/logo"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/switch_login"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tx_login"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:gravity="center"
+                android:textColor="@color/md_blue_grey_500"
+                android:text="登录"
+                android:textSize="@dimen/app_text_size_large"/>
+
+            <View
+                android:id="@+id/below_login"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/md_grey_500"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/switch_signin"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="30dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tx_signin"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:textColor="@color/md_blue_grey_500"
+                android:gravity="center"
+                android:text="注册"
+                android:textSize="@dimen/app_text_size_large"/>
+
+            <View
+                android:id="@+id/below_signin"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/md_grey_500"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/fragment_replace"/>
+
+
+</LinearLayout>

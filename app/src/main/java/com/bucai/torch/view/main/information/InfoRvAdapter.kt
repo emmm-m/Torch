@@ -14,7 +14,7 @@ import com.bucai.torch.R
 import com.bucai.torch.util.uiutils.MyImageView
 import com.bucai.torch.view.WebActivity
 import com.bumptech.glide.Glide
-import java.util.*
+import java.text.SimpleDateFormat
 
 /**
  * Created by zxzhu
@@ -35,21 +35,23 @@ class InfoRvAdapter(var newsData: MutableList<AVObject>, val mContext: Context) 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val obj = newsData[position]
         holder.tittle.text = obj.get("tittle").toString()
-        val date: Date = obj.get("createdAt") as Date
-        holder.date.text = "" + date.month + "月" + date.day + "日"
+        val createdAt = obj.createdAt
+        val mFormat = SimpleDateFormat("MM月dd日")
+        holder.date.text = mFormat.format(createdAt)
         holder.seen.text = obj.get("seen").toString() + "次浏览"
         val picUrl = (obj.get("pic") as AVFile).url
         if (picUrl != null) Glide.with(mContext).load(picUrl).into(holder.pic)
         //点击事件，计数器++
-        holder.itemView.setOnClickListener {
-            val intent = Intent(mContext, WebActivity::class.java)
-            intent.putExtra("tittle", obj.get("tittle").toString())
-            intent.putExtra("url", obj.get("url").toString())
-            mContext.startActivity(intent)
-            obj.increment("seen")
-            obj.isFetchWhenSave = true
-            obj.saveInBackground()
-        }
+        if (obj.get("url") != null)
+            holder.itemView.setOnClickListener {
+                obj.increment("seen")
+                obj.isFetchWhenSave = true
+                obj.saveInBackground()
+                val intent = Intent(mContext, WebActivity::class.java)
+                intent.putExtra("tittle", obj.get("tittle").toString())
+                intent.putExtra("url", obj.get("url").toString())
+                mContext.startActivity(intent)
+            }
     }
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

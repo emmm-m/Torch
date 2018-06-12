@@ -7,10 +7,12 @@ import android.util.Log;
 
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVFile;
+import com.avos.avoscloud.AVOSCloud;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.FollowCallback;
 import com.avos.avoscloud.LogInCallback;
+import com.avos.avoscloud.RequestMobileCodeCallback;
 import com.avos.avoscloud.SignUpCallback;
 
 import java.io.File;
@@ -22,8 +24,6 @@ import java.io.FileOutputStream;
  */
 
 public class UserModel implements IUserModel {
-
-    public static final String USERNAME = AVUser.getCurrentUser().getUsername();
 
     public interface UserListener {
         void onSuccess();
@@ -74,6 +74,35 @@ public class UserModel implements IUserModel {
             }
         });
         user.saveInBackground();
+    }
+
+    @Override
+    public void getCode(String phone, final UserListener listener) {
+        AVOSCloud.requestSMSCodeInBackground(phone, new RequestMobileCodeCallback() {
+            @Override
+            public void done(AVException e) {
+                if (e == null) listener.onSuccess();
+                else listener.onError(e);
+            }
+        });
+    }
+
+    @Override
+    public void signUpWithPhone(String phone, String code, final String password, final UserListener listener) {
+        AVUser.signUpOrLoginByMobilePhoneInBackground(phone, code, new LogInCallback<AVUser>() {
+            @Override
+            public void done(AVUser avUser, AVException e) {
+
+                if (e == null) {
+                    listener.onSuccess();
+                    avUser.setPassword(password);
+                    avUser.saveInBackground();
+                } else {
+                    Log.d("zzxsign", "done: "+ e.toString());
+                    listener.onError(e);
+                }
+            }
+        });
     }
 
 

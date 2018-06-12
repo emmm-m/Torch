@@ -13,6 +13,7 @@ import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.FindCallback;
 import com.avos.avoscloud.GetCallback;
 import com.avos.avoscloud.SaveCallback;
+import com.bucai.torch.view.main.MainActivity;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -42,7 +43,7 @@ public class UpLoadModel implements IUpLoadModel {
         listener.onStart();
         AVObject avObject = new AVObject("Square");
         AVFile pic = null, picMini = null;
-        String namePic = UserModel.USERNAME + "_pic_" + System.currentTimeMillis();
+        String namePic = MainActivity.Companion.getUSER() + "_pic_" + System.currentTimeMillis();
         String namePicMini = "miniPic_" + namePic;
         try {
             Log.d(TAG, "upLoadPic: " + picPath);
@@ -51,7 +52,7 @@ public class UpLoadModel implements IUpLoadModel {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        avObject.put("username", UserModel.USERNAME);
+        avObject.put("username", MainActivity.Companion.getUSER());
         avObject.put("content", pic);
         avObject.put("picMini", picMini);
         avObject.put("type", PIC);
@@ -95,9 +96,9 @@ public class UpLoadModel implements IUpLoadModel {
         AVObject avObject = new AVObject("Square");
         AVFile pic = null, picMini = null, voice = null;
         String time = System.currentTimeMillis() + "";
-        String namePic = UserModel.USERNAME + "_pci_" + time;
+        String namePic = MainActivity.Companion.getUSER() + "_pci_" + time;
         String namePicMini = "miniPic_" + namePic;
-        String nameVoice = UserModel.USERNAME + "_voice_" + time;
+        String nameVoice = MainActivity.Companion.getUSER() + "_voice_" + time;
         try {
             pic = AVFile.withAbsoluteLocalPath(namePic, picPath);
             picMini = AVFile.withAbsoluteLocalPath(namePicMini, miniPicPath);
@@ -105,7 +106,7 @@ public class UpLoadModel implements IUpLoadModel {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        avObject.put("username", UserModel.USERNAME);
+        avObject.put("username", MainActivity.Companion.getUSER());
         avObject.put("content", pic);
         avObject.put("picMini", picMini);
         avObject.put("voice", voice);
@@ -136,8 +137,8 @@ public class UpLoadModel implements IUpLoadModel {
                 if (obj.get("comment_audio") != null) {
                     map_audio = (HashMap<String, Object>) obj.get("comment_audio");
                 }
-                list_tx.add("[" + UserModel.USERNAME + "]" + "(" + time + ")" + "{" + text + "}");
-                final String fileName = "comment_" + UserModel.USERNAME + time;
+                list_tx.add("[" + MainActivity.Companion.getUSER() + "]" + "(" + time + ")" + "{" + text + "}");
+                final String fileName = "comment_" + MainActivity.Companion.getUSER() + time;
                 AVFile avFile = null;
                 if (audioPath != null) {
                     try {

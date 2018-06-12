@@ -2,11 +2,13 @@ package com.bucai.torch.view
 
 import android.content.Intent
 import com.avos.avoscloud.AVOSCloud
+import com.avos.avoscloud.AVUser
 import com.bucai.torch.R
 import com.bucai.torch.util.Apis
 import com.bucai.torch.util.LogUtil
 import com.bucai.torch.view.base.BaseActivity
 import com.bucai.torch.view.main.MainActivity
+import com.bucai.torch.view.login.LoginActivity
 import com.yanzhenjie.permission.AndPermission
 import com.yanzhenjie.permission.Permission
 import com.zia.toastex.ToastEx
@@ -30,8 +32,13 @@ class StartActivity : BaseActivity() {
                             Permission.Group.MICROPHONE)
                     .onGranted {
                         LogUtil.e("onGranted")
-                        startActivity(Intent(this@StartActivity, MainActivity::class.java))
-                        finish()
+                        if (AVUser.getCurrentUser() != null) {
+                            startActivity(Intent(this@StartActivity, MainActivity::class.java))
+                            finish()
+                        } else {
+                            startActivity(Intent(this@StartActivity, LoginActivity::class.java))
+                            finish()
+                        }
                     }
                     .onDenied {
                         LogUtil.e("onDenied")
@@ -39,6 +46,7 @@ class StartActivity : BaseActivity() {
                         finish()
                     }
                     .start()
-        }).start()    }
+        }).start()
+    }
 
 }

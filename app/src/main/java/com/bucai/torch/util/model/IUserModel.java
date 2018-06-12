@@ -10,6 +10,8 @@ import android.graphics.Bitmap;
 public interface IUserModel {
     void login(String username, String password, UserModel.UserListener listener);
     void signUp(Context context, String username, String password, String phoneNumber, Bitmap icon, UserModel.UserListener listener);
+    void getCode(String phone, UserModel.UserListener listener);
+    void signUpWithPhone(String phone, String code, String password, UserModel.UserListener listener);
     void setIcon(String icon);
     void setReadme(String readme);
     Bitmap getIcon(String username);
