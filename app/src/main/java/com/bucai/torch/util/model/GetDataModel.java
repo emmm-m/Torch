@@ -3,12 +3,18 @@ package com.bucai.torch.util.model;
 import android.util.Log;
 
 import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVFile;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.FindCallback;
 import com.avos.avoscloud.GetCallback;
+import com.bucai.torch.bean.FreeTime;
+import com.bucai.torch.bean.Teacher;
+import com.bucai.torch.util.ThreadPool;
 
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -26,23 +32,23 @@ public class GetDataModel implements IGetDataModel {
         void onFinish(List<T> list);
     }
 
-    @Override
-    public void getTeachersList(final GetDataListener<AVObject> listener) {
-        listener.onStart();
-        AVQuery<AVObject> query = new AVQuery<>("Teachers");
-        query.whereContains("name", "");
-        query.findInBackground(new FindCallback<AVObject>() {
-            @Override
-            public void done(List<AVObject> list, AVException e) {
-                if (e == null) {
-                    listener.onFinish(list);
-                } else {
-                    Log.d("]]]", "done: " + e);
-                    listener.onError(e);
-                }
-            }
-        });
-    }
+//    @Override
+//    public void getTeachersList(final GetDataListener<AVObject> listener) {
+//        listener.onStart();
+//        AVQuery<AVObject> query = new AVQuery<>("Teachers");
+//        query.whereContains("name", "");
+//        query.findInBackground(new FindCallback<AVObject>() {
+//            @Override
+//            public void done(List<AVObject> list, AVException e) {
+//                if (e == null) {
+//                    listener.onFinish(list);
+//                } else {
+//                    Log.d("]]]", "done: " + e);
+//                    listener.onError(e);
+//                }
+//            }
+//        });
+//    }
 
     @Override
     public void getTeachersList(String content, final GetDataListener<AVObject> listener) {
@@ -70,7 +76,7 @@ public class GetDataModel implements IGetDataModel {
 
     @Override
     public void gerUserData(String username, final GetDataListener<AVUser> listener) {
-        Log.d("----", "error！！！！: " );
+        Log.d("----", "error！！！！: ");
         listener.onStart();
         AVQuery<AVUser> query = new AVQuery<>("_User");
         query.whereEqualTo("username", username);
@@ -214,6 +220,68 @@ public class GetDataModel implements IGetDataModel {
                 }
             }
         });
+    }
+
+    @Override
+    public void getTeachersList(final GetDataListener<Teacher> getDataListener) {
+        getDataListener.onStart();
+        AVQuery<AVObject> query = new AVQuery<>("Teacher");
+        query.setOrder("star");
+        query.findInBackground(new FindCallback<AVObject>() {
+            @Override
+            public void done(final List<AVObject> list, AVException e) {
+                if (e != null) {
+                    getDataListener.onError(e);
+                } else {
+                    ThreadPool.instance.getSingleThreadExecutor().execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            List<Teacher> teachers = new ArrayList<>();
+                            for (AVObject avObject : list) {
+                                try {
+                                    teachers.add(convert(avObject));
+                                } catch (AVException e1) {
+                                    e1.printStackTrace();
+                                    getDataListener.onError(e1);
+                                    return;
+                                } catch (FileNotFoundException e2) {
+                                    e2.printStackTrace();
+                                }
+                            }
+                            Log.d("GetDataModel", teachers.toString());
+                            getDataListener.onFinish(teachers);
+                        }
+                    });
+
+                }
+            }
+        });
+    }
+
+    @Override
+    public Teacher getTeacher(String objectId) throws AVException, FileNotFoundException {
+        AVQuery avQuery = new AVQuery("Teacher");
+        return convert(avQuery.get(objectId));
+    }
+
+    private Teacher convert(AVObject avObject) throws AVException, FileNotFoundException {
+        Teacher teacher = new Teacher();
+        teacher.setAge((int) avObject.get("age"));
+        teacher.setCertification((int) avObject.get("certification"));
+        teacher.setDescription((ArrayList<String>) avObject.get("description"));
+        teacher.setFreeTime((ArrayList<FreeTime>) avObject.get("freeTime"));
+        teacher.setName((String) avObject.get("name"));
+        teacher.setPhone((String) avObject.get("phone"));
+        teacher.setPrice((String) avObject.get("price"));
+        teacher.setSex((String) avObject.get("sex"));
+        teacher.setStar((int) avObject.get("star"));
+        teacher.setYear((int) avObject.get("year"));
+        teacher.setObjectId(avObject.getObjectId());
+        AVFile head = avObject.getAVFile("header");
+        if (head != null) {
+            teacher.setHead(AVFile.withObjectId(head.getObjectId()).getUrl());
+        }
+        return teacher;
     }
 
 }

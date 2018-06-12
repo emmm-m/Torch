@@ -31,6 +31,7 @@
         android:text="教龄8年|已授536课" />
 
     <TextView
+        android:id="@+id/item_home_rv_normal_star"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/item_home_rv_normal_imageView"
@@ -47,6 +48,7 @@
         android:text="南岸区" />
 
     <TextView
+        android:id="@+id/item_home_rv_normal_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/item_home_rv_normal_imageView"

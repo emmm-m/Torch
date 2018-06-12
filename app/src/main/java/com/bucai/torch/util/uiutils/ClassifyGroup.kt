@@ -31,7 +31,7 @@ class ClassifyGroup : ViewGroup {
             val textView = TextView(context)
             textView.text = it
             textView.textSize = textSize
-            Log.e("row", "before:${textView.textSize}")
+            Log.d("row", "before:${textView.textSize}")
             textView.background = resources.getDrawable(id)
             textView.setTextColor(textColor)
             textView.gravity = Gravity.CENTER
@@ -44,7 +44,7 @@ class ClassifyGroup : ViewGroup {
 
     public fun addItems(itemViews: List<TextView>, column: Int) {
         if (column <= 0 || itemViews.isEmpty()) {
-            Log.e(TAG, "column <= 0 || itemViews.isEmpty()")
+            Log.d(TAG, "column <= 0 || itemViews.isEmpty()")
             return
         }
         post {
@@ -59,19 +59,17 @@ class ClassifyGroup : ViewGroup {
             if (pw <= 0) {
                 val tw = width / 4 * 0.9f
                 val scale = tw / w
-                Log.e("zia", "scale:$scale")
+                Log.d(TAG, "scale:$scale")
                 paint.textSize = tv.textSize * scale
                 itemViews.forEach {
-                    Log.e("emmm", "before:${it.textSize * scale}")
                     it.setTextSize(TypedValue.COMPLEX_UNIT_PX, h * 0.5f)
                     it.includeFontPadding = false
-                    Log.e("emmm", "after:${it.textSize}")
                 }
                 w = tw.toInt()
                 pw = (width / column - w) / 2
                 h = (h * scale).toInt()
             }
-            Log.e(TAG, "w:$w,pw:$pw,h:$h")
+            Log.d(TAG, "w:$w,pw:$pw,h:$h")
 
             //更改layout
             var lines = itemViews.size / column
@@ -84,7 +82,7 @@ class ClassifyGroup : ViewGroup {
                 val x = (width / column) * (i % column) + pw / 2
                 val y = (h + pw * 2) * (i / column)
                 addView(textView)
-                Log.e("zia", "l:$x,t:${y + pw},r:${x + w},b:${y + h + pw}")
+                Log.d(TAG, "l:$x,t:${y + pw},r:${x + w},b:${y + h + pw}")
                 textView.layout(x, y + pw, x + w, y + h + pw)
             }
         }

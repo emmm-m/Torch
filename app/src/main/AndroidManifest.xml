@@ -30,7 +30,7 @@
         <activity android:name=".view.EvaluatePrepareActivity" />
         <activity android:name=".view.WebActivity" />
         <activity android:name=".view.main.measurement.MeasureDetailActivity" />
-        <activity android:name=".view.main.appointment.TeaInfoActivity"></activity>
+        <activity android:name=".view.main.appointment.TeaInfoActivity" />
     </application>
 
 </manifest>
