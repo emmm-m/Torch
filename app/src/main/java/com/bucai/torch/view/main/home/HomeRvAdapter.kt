@@ -11,8 +11,10 @@ import android.widget.TextView
 import com.avos.avoscloud.AVException
 import com.avos.avoscloud.AVObject
 import com.bucai.torch.R
+import com.bucai.torch.bean.Teacher
 import com.bucai.torch.util.model.GetDataModel
 import com.bucai.torch.util.model.IGetDataModel
+import com.bumptech.glide.Glide
 import com.jude.rollviewpager.RollPagerView
 
 /**
@@ -25,11 +27,12 @@ class HomeRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val ADJUST = 2
     private val CLASSIFY = 3
     private val NORMAL = 4
-    private var views = ArrayList<View>()
+    private var teachers = ArrayList<Teacher>()
     private val getDataModel: IGetDataModel = GetDataModel()
 
-    fun setGalleryViews(list: ArrayList<View>) {
-        this.views = list
+    fun freshTeacher(teachers: ArrayList<Teacher>) {
+        this.teachers = teachers
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -64,7 +67,7 @@ class HomeRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         when (holder) {
             is SearchHolder -> holder.location.text = "重庆"
             is GallaryHolder -> {
-                getDataModel.getRollPics(object : GetDataModel.GetDataListener<AVObject>{
+                getDataModel.getRollPics(object : GetDataModel.GetDataListener<AVObject> {
                     override fun onStart() {
 //                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                     }
@@ -74,7 +77,8 @@ class HomeRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     }
 
                     override fun onFinish(list: MutableList<AVObject>?) {
-                        holder.viewPager.setAdapter(RollPicsAdapter(list))                    }
+                        holder.viewPager.setAdapter(RollPicsAdapter(list))
+                    }
                 })
 
             }
@@ -84,14 +88,17 @@ class HomeRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             is ClassifyHolder -> {
 
             }
-            else -> {
-
+            is NormalHolder -> {
+                val teacher = teachers[position - 4]
+                holder.name.text = teacher.name.toString()
+                holder.price.text = teacher.price
+                Glide.with(holder.itemView.context).load(teacher.head).into(holder.head)
             }
         }
     }
 
     override fun getItemCount(): Int {
-        return 30
+        return teachers.size + 4
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -117,6 +124,13 @@ class HomeRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     class AdjustHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
     class ClassifyHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
-    class NormalHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+
+    class NormalHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val head = itemView.findViewById<ImageView>(R.id.item_home_rv_normal_imageView)
+        val name = itemView.findViewById<TextView>(R.id.item_home_rv_normal_name)
+        val location = itemView.findViewById<TextView>(R.id.item_home_rv_normal_address)
+        val price = itemView.findViewById<TextView>(R.id.item_home_rv_normal_price)
+        val star = itemView.findViewById<TextView>(R.id.item_home_rv_normal_star)
+    }
 
 }

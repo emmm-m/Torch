@@ -1,10 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".view.main.mine.MineFragment">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/orange"
+        android:gravity="center"
+        android:paddingTop="20dp"
+        android:text="Torch"
+        android:textColor="@color/white"
+        android:textSize="@dimen/app_text_size_xxxlarge"
+        android:textStyle="italic|bold"/>
+
+    <Button
+        android:id="@+id/mine_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="send" />
     <Button
         android:id="@+id/btn_logout"
         android:layout_gravity="center"
@@ -12,4 +30,11 @@
         android:layout_height="wrap_content"
         android:text="退出登录" />
 
-</FrameLayout>
+    <Button
+        android:id="@+id/mine_get"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="get" />
+
+</LinearLayout>

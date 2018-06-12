@@ -26,26 +26,30 @@ class MainActivity : BaseActivity() {
     override val contentViewId: Int = R.layout.activity_main
 
     override fun initData() {
+        setEvaluate()
         val adapter = MyPagerAdapter(supportFragmentManager)
         main_viewPager.adapter = adapter
         setBottomNavigate()
-        setEvaluate()
+        toPage()
     }
 
     companion object {
         var USER : String? = AVUser.getCurrentUser().username
     }
 
-    override fun onNewIntent(intent: Intent?) {
-        super.onNewIntent(intent)
-        val count = intent!!.getIntExtra("count", 0)
-        main_viewPager.currentItem = count
+    fun toPage(){
+        if (intent != null){
+            val count = intent.getIntExtra("count", 0)
+            main_viewPager.currentItem = count
+        }
     }
 
 
     private fun setEvaluate() {
-        if(SharedPreferencesUtils.getParam(this, "hasEvaluated", false))
+        if (!SharedPreferencesUtils.getParam(this, "hasEvaluated", false)){
             startActivity(Intent(this@MainActivity, EvaluatePrepareActivity::class.java))
+            finish()
+        }
     }
 
     private fun setBottomNavigate() {

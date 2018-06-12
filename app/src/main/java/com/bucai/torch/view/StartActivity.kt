@@ -28,8 +28,7 @@ class StartActivity : BaseActivity() {
             AndPermission.with(this@StartActivity)
                     .runtime()
                     .permission(Permission.Group.STORAGE,
-                            Permission.Group.CAMERA,
-                            Permission.Group.MICROPHONE)
+                            Permission.Group.CAMERA)
                     .onGranted {
                         LogUtil.e("onGranted")
                         if (AVUser.getCurrentUser() != null) {

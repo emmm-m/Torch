@@ -11,8 +11,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
+import com.avos.avoscloud.AVException
 
 import com.bucai.torch.R
+import com.bucai.torch.bean.Teacher
 import com.bucai.torch.util.model.GetDataModel
 import com.bucai.torch.util.model.IGetDataModel
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -31,31 +33,28 @@ class HomeFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
-
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         adapter = HomeRvAdapter()
         home_rv.adapter = adapter
         home_rv.layoutManager = LinearLayoutManager(context)
-        loadGalleryImages()
-    }
+        GetDataModel().getTeachersList(object  : GetDataModel.GetDataListener<Teacher>{
+            override fun onStart() {
 
-    private fun loadGalleryImages(){
-        val list = ArrayList<View>()
-        val imageView1 = ImageView(context)
-        imageView1.setBackgroundColor(Color.RED)
-        list.add(imageView1)
-        val imageView2 = ImageView(context)
-        imageView2.setBackgroundColor(Color.GREEN)
-        list.add(imageView2)
-        val imageView3 = ImageView(context)
-        imageView3.setBackgroundColor(Color.BLACK)
-        list.add(imageView3)
-        adapter.setGalleryViews(list)
-    }
+            }
 
+            override fun onError(e: AVException?) {
+                e?.printStackTrace()
+            }
+
+            override fun onFinish(list: MutableList<Teacher>?) {
+                Log.e("zia",list?.toString())
+                this@HomeFragment.activity?.runOnUiThread {
+                    adapter.freshTeacher(list as ArrayList<Teacher>)
+                }
+            }
+        })
+    }
 }
 
 fun Fragment.log(str: String) {
