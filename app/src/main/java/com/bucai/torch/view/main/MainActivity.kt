@@ -9,6 +9,7 @@ import android.widget.Toast
 import com.avos.avoscloud.AVUser
 import com.bucai.torch.R
 import com.bucai.torch.util.SharedPreferencesUtils
+import com.bucai.torch.view.CompleteActivity
 import com.bucai.torch.view.EvaluatePrepareActivity
 import com.bucai.torch.view.base.BaseActivity
 import com.bucai.torch.view.main.appointment.AppointFragment
@@ -31,6 +32,13 @@ class MainActivity : BaseActivity() {
         main_viewPager.adapter = adapter
         setBottomNavigate()
         toPage()
+        checkHasUserInfo()
+    }
+
+    private fun checkHasUserInfo() {
+        if (AVUser.getCurrentUser().get("nickname") == null) {
+            startActivity(Intent(this@MainActivity, CompleteActivity::class.java))
+        }
     }
 
     companion object {

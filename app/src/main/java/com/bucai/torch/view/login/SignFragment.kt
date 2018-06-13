@@ -1,4 +1,5 @@
 package com.bucai.torch.view.login
+
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
@@ -24,6 +25,7 @@ import kotlinx.android.synthetic.main.fragment_signin.*
  */
 class SignFragment : Fragment() {
     val model: IUserModel = UserModel()
+    private var counter: CountDownTimer? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -43,7 +45,7 @@ class SignFragment : Fragment() {
                 toast("密码过短")
                 return@setOnClickListener
             }
-            if (edit_verification_sign.text == null) {
+            if (edit_verification_sign.text.toString() == "") {
                 toast("请输入短信验证码")
                 return@setOnClickListener
             }
@@ -52,7 +54,7 @@ class SignFragment : Fragment() {
                 return@setOnClickListener
             }
             model.signUpWithPhone(edit_phone_sign.text.toString(), edit_verification_sign.text.toString(),
-                    edit_password_sign.text.toString(), object :UserModel.UserListener{
+                    edit_password_sign.text.toString(), object : UserModel.UserListener {
                 override fun onSuccess() {
                     startActivity(Intent(activity, MainActivity::class.java))
                     activity!!.finish()
@@ -73,7 +75,7 @@ class SignFragment : Fragment() {
                 toast("请输入正确的手机号")
                 return@setOnClickListener
             }
-            model.getCode(edit_phone_sign.text.toString(), object : UserModel.UserListener{
+            model.getCode(edit_phone_sign.text.toString(), object : UserModel.UserListener {
                 override fun onSuccess() {
                     setTimer()
                 }
@@ -87,7 +89,7 @@ class SignFragment : Fragment() {
     }
 
     private fun setTimer() {
-        object : CountDownTimer((60 * 1000).toLong(), 1000) {
+        counter = object : CountDownTimer((60 * 1000).toLong(), 1000) {
             @SuppressLint("SetTextI18n")
             override fun onTick(millisUntilFinished: Long) {
                 btn_get_verification.text = "" + millisUntilFinished / 1000 + "秒"
@@ -103,5 +105,10 @@ class SignFragment : Fragment() {
                 }
             }
         }.start()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        if (counter != null) counter!!.cancel()
     }
 }

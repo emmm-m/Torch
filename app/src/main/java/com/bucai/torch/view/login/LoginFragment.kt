@@ -40,7 +40,7 @@ class LoginFragment : Fragment() {
 
     private fun setLogin() {
         btn_login.setOnClickListener {
-            if (edit_phone_login.text.length != 11 || edit_password_login.text == null) {
+            if (edit_phone_login.text.length != 11 || edit_password_login.text.toString() == "") {
                 toast("请输入合法的手机号和密码")
                 return@setOnClickListener
             }

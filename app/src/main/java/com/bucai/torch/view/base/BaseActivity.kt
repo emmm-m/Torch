@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
+import com.bucai.torch.util.LogUtil
 
 abstract class BaseActivity : AppCompatActivity(), IBaseActivity {
 
@@ -55,5 +56,9 @@ abstract class BaseActivity : AppCompatActivity(), IBaseActivity {
 
     //用于做数据或其他初始化的方法
     protected abstract fun initData()
+
+    fun log(str: String) {
+        LogUtil.d(this.toString() + "Test", str)
+    }
 
 }

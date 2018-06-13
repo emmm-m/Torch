@@ -10,6 +10,7 @@ public class LogUtil {
     private final static boolean openLog = true;
     private final static String TAG = "LogUtil";
 
+
     public static void e(String msg) {
         e(TAG, msg);
     }

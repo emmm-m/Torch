@@ -46,6 +46,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.7.1'
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.jude:rollviewpager:1.4.6'
+    implementation 'com.zhihu.android:matisse:0.4.3'
     // LeanCloud 基础包
     implementation('cn.leancloud.android:avoscloud-sdk:v4.6.4')
     // 推送与实时聊天需要的包

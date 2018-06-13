@@ -13,6 +13,7 @@ public interface IUserModel {
     void getCode(String phone, UserModel.UserListener listener);
     void signUpWithPhone(String phone, String code, String password, UserModel.UserListener listener);
     void setIcon(String icon);
+    void setInfo(String nickname, int age, Bitmap header, UserModel.UserListener listener);
     void setReadme(String readme);
     Bitmap getIcon(String username);
     String getPhoneNumber(String username);

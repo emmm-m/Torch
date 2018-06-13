@@ -6,6 +6,6 @@ package com.bucai.torch.util
  *   enjoy it !!
  */
 object Apis {
-    val LeanCloudId = "umvcn1HdHuI4NXRHhL21nREX-gzGzoHsz"
-    val LeanCloudKey = "9UpFgVnnaBAXrbPf86TSb6BX"
+    const val LeanCloudId = "umvcn1HdHuI4NXRHhL21nREX-gzGzoHsz"
+    const val LeanCloudKey = "9UpFgVnnaBAXrbPf86TSb6BX"
 }

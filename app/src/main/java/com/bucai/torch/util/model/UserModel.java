@@ -14,6 +14,7 @@ import com.avos.avoscloud.FollowCallback;
 import com.avos.avoscloud.LogInCallback;
 import com.avos.avoscloud.RequestMobileCodeCallback;
 import com.avos.avoscloud.SignUpCallback;
+import com.bucai.torch.view.main.MainActivity;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -112,6 +113,34 @@ public class UserModel implements IUserModel {
     }
 
     @Override
+    public void setInfo(String nickname, int age, Bitmap header, final UserListener listener) {
+        AVUser user = AVUser.getCurrentUser();
+        user.put("nickname", nickname);
+        user.put("age", age);
+        String iconPath = saveBitmap(header, MainActivity.Companion.getUSER());
+        Log.d("zzzx", "signUp: " + iconPath);
+        AVFile avFile = null;
+        try {
+            avFile = AVFile.withAbsoluteLocalPath(MainActivity.Companion.getUSER(), iconPath);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+        if (avFile != null) user.put("head", avFile);
+        user.signUpInBackground(new SignUpCallback() {
+            @Override
+            public void done(AVException e) {
+                if (e == null) {
+                    listener.onSuccess();
+                } else {
+                    listener.onError(e);
+                }
+            }
+        });
+    }
+
+    @Override
     public void setReadme(String readme) {
 
     }
@@ -136,7 +165,7 @@ public class UserModel implements IUserModel {
         FileOutputStream foutput = null;
         String imagePath = null;
         try {
-            File appDir = new File(Environment.getExternalStorageDirectory(), "Teller");
+            File appDir = new File(Environment.getExternalStorageDirectory(), "Torch");
             if (!appDir.exists()) {
                 appDir.mkdir();
             }
