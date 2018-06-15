@@ -207,6 +207,7 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
+                        android:id="@+id/tea_info_introduceLayout"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -215,6 +216,7 @@
                         android:paddingRight="30dp">
 
                         <TextView
+                            android:id="@+id/tea_info_introduceText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
@@ -225,6 +227,7 @@
                             android:textStyle="bold" />
 
                         <View
+                            android:id="@+id/tea_info_introduce_bottom"
                             android:layout_width="match_parent"
                             android:layout_height="3dp"
                             android:background="#DD7049" />
@@ -232,6 +235,7 @@
 
 
                     <LinearLayout
+                        android:id="@+id/tea_info_appointLayout"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -240,6 +244,7 @@
                         android:paddingRight="30dp">
 
                         <TextView
+                            android:id="@+id/tea_info_appointText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
@@ -250,6 +255,7 @@
                             android:textStyle="bold" />
 
                         <View
+                            android:id="@+id/tea_info_appointBottom"
                             android:layout_width="match_parent"
                             android:layout_height="3dp"
                             android:background="#DD7049"

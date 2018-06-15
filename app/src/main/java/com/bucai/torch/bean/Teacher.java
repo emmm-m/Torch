@@ -23,7 +23,7 @@ public class Teacher implements Serializable {
     private int year;
     private int certification;
     private String price = "";
-    private ArrayList<FreeTime> freeTime;
+    private FreeTime freeTime;
     private String head = "";
     private String objectId = "";
 
@@ -133,11 +133,11 @@ public class Teacher implements Serializable {
         this.price = price;
     }
 
-    public ArrayList<FreeTime> getFreeTime() {
+    public FreeTime getFreeTime() {
         return freeTime;
     }
 
-    public void setFreeTime(ArrayList<FreeTime> freeTime) {
+    public void setFreeTime(FreeTime freeTime) {
         this.freeTime = freeTime;
     }
 

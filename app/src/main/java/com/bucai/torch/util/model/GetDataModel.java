@@ -12,6 +12,7 @@ import com.avos.avoscloud.GetCallback;
 import com.bucai.torch.bean.FreeTime;
 import com.bucai.torch.bean.Teacher;
 import com.bucai.torch.util.ThreadPool;
+import com.google.gson.Gson;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -265,11 +266,12 @@ public class GetDataModel implements IGetDataModel {
     }
 
     private Teacher convert(AVObject avObject) throws AVException, FileNotFoundException {
+        Gson gson = new Gson();
         Teacher teacher = new Teacher();
         teacher.setAge((int) avObject.get("age"));
         teacher.setCertification((int) avObject.get("certification"));
         teacher.setDescription((ArrayList<String>) avObject.get("description"));
-        teacher.setFreeTime((ArrayList<FreeTime>) avObject.get("freeTime"));
+        teacher.setFreeTime(gson.fromJson((String) avObject.get("freeTime"), FreeTime.class));
         teacher.setName((String) avObject.get("name"));
         teacher.setPhone((String) avObject.get("phone"));
         teacher.setPrice((String) avObject.get("price"));

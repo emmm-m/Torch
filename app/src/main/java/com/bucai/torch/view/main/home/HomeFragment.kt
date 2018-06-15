@@ -1,7 +1,6 @@
 package com.bucai.torch.view.main.home
 
 
-import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -9,10 +8,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
 import com.avos.avoscloud.AVException
-
 import com.bucai.torch.R
 import com.bucai.torch.bean.Teacher
 import com.bucai.torch.util.model.GetDataModel
@@ -38,7 +35,7 @@ class HomeFragment : Fragment() {
         adapter = HomeRvAdapter()
         home_rv.adapter = adapter
         home_rv.layoutManager = LinearLayoutManager(context)
-        GetDataModel().getTeachersList(object  : GetDataModel.GetDataListener<Teacher>{
+        GetDataModel().getTeachersList(object : GetDataModel.GetDataListener<Teacher> {
             override fun onStart() {
 
             }
@@ -48,7 +45,7 @@ class HomeFragment : Fragment() {
             }
 
             override fun onFinish(list: MutableList<Teacher>?) {
-                Log.e("zia",list?.toString())
+                Log.e("zia", list?.toString())
                 this@HomeFragment.activity?.runOnUiThread {
                     adapter.freshTeacher(list as ArrayList<Teacher>)
                 }

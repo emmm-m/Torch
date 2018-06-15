@@ -36,7 +36,6 @@ class ClassifyGroup : ViewGroup {
             textView.setTextColor(textColor)
             textView.gravity = Gravity.CENTER
             textView.includeFontPadding = false
-//            textView.setBackgroundColor(Color.GREEN)
             textView
         }
         addItems(itemViews, column)
@@ -48,6 +47,7 @@ class ClassifyGroup : ViewGroup {
             return
         }
         post {
+            removeAllViews()
             val paint = Paint()
             val tv = itemViews.maxBy { it.text.length }//以最长的字符串为基准
             paint.textSize = tv!!.textSize
