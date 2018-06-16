@@ -240,7 +240,7 @@ public class GetDataModel implements IGetDataModel {
                             List<Teacher> teachers = new ArrayList<>();
                             for (AVObject avObject : list) {
                                 try {
-                                    teachers.add(convert(avObject));
+                                    teachers.add(convert(avObject, false));
                                 } catch (AVException e1) {
                                     e1.printStackTrace();
                                     getDataListener.onError(e1);
@@ -262,16 +262,31 @@ public class GetDataModel implements IGetDataModel {
     @Override
     public Teacher getTeacher(String objectId) throws AVException, FileNotFoundException {
         AVQuery avQuery = new AVQuery("Teacher");
-        return convert(avQuery.get(objectId));
+        return convert(avQuery.get(objectId), false);
     }
 
-    private Teacher convert(AVObject avObject) throws AVException, FileNotFoundException {
+    @Override
+    public Teacher getTeacherSchedule(String objectId) throws AVException, FileNotFoundException {
+        AVQuery avQuery = new AVQuery("Teacher");
+        return convert(avQuery.get(objectId), true);
+    }
+
+    @Override
+    public Teacher getTeacherSchedule(Teacher teacher) throws AVException {
+        AVQuery<AVObject> avQuery = new AVQuery<>("Teacher");
+        avQuery.whereEqualTo("objectId", teacher.getObjectId());
+        teacher.setFreeTime(new Gson().fromJson(avQuery.find().get(0).getString("freeTime"), FreeTime.class));
+        return teacher;
+    }
+
+    private Teacher convert(AVObject avObject, boolean getSchedule) throws AVException, FileNotFoundException {
         Gson gson = new Gson();
         Teacher teacher = new Teacher();
         teacher.setAge((int) avObject.get("age"));
         teacher.setCertification((int) avObject.get("certification"));
         teacher.setDescription((ArrayList<String>) avObject.get("description"));
-        teacher.setFreeTime(gson.fromJson((String) avObject.get("freeTime"), FreeTime.class));
+        if (getSchedule)
+            teacher.setFreeTime(gson.fromJson((String) avObject.get("freeTime"), FreeTime.class));
         teacher.setName((String) avObject.get("name"));
         teacher.setPhone((String) avObject.get("phone"));
         teacher.setPrice((String) avObject.get("price"));

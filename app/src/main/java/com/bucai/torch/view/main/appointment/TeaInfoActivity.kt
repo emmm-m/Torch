@@ -1,12 +1,16 @@
 package com.bucai.torch.view.main.appointment
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.bucai.torch.R
 import com.bucai.torch.bean.Teacher
+import com.bucai.torch.util.ThreadPool
+import com.bucai.torch.util.model.GetDataModel
 import com.bumptech.glide.Glide
+import com.zia.toastex.ToastEx
 import kotlinx.android.synthetic.main.activity_tea_info.*
 
 class TeaInfoActivity : AppCompatActivity() {
@@ -27,7 +31,21 @@ class TeaInfoActivity : AppCompatActivity() {
             showIntroduce()
         }
         tea_info_appointLayout.setOnClickListener {
-            showAppointment()
+            ToastEx.info(this@TeaInfoActivity, "正在加载教师资源，请等待").show()
+        }
+        tea_info_learnMore.setOnClickListener {
+            ToastEx.info(this@TeaInfoActivity, "正在加载教师资源，请等待").show()
+        }
+        ThreadPool.instance.cachedThreadPool.execute {
+            teacher = GetDataModel().getTeacherSchedule(teacher)
+            tea_info_appointLayout.setOnClickListener {
+                showAppointment()
+            }
+            tea_info_learnMore.setOnClickListener {
+                val intent = Intent(this@TeaInfoActivity, AppointChooseActivity::class.java)
+                intent.putExtra("teacher", teacher)
+                startActivity(intent)
+            }
         }
     }
 

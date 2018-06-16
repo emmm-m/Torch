@@ -79,6 +79,8 @@ class ClassifyGroup : ViewGroup {
             //添加到viewGroup
             for (i in 0 until itemViews.size) {
                 val textView = itemViews[i]
+                if (clickListener != null)
+                    textView.setOnClickListener(clickListener)
                 val x = (width / column) * (i % column) + pw / 2
                 val y = (h + pw * 2) * (i / column)
                 addView(textView)
@@ -86,5 +88,14 @@ class ClassifyGroup : ViewGroup {
                 textView.layout(x, y + pw, x + w, y + h + pw)
             }
         }
+    }
+
+    //    public interface OnItemClickListener{
+//        fun click
+//    }
+    private var clickListener: OnClickListener? = null
+
+    public fun setItemClickListener(clickListener: OnClickListener) {
+        this.clickListener = clickListener
     }
 }

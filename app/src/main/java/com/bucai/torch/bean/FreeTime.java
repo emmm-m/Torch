@@ -88,6 +88,15 @@ public class FreeTime implements Serializable {
     public static class Time implements Serializable {
         private String start;
         private String end;
+        private boolean empty;
+
+        public boolean isEmpty() {
+            return empty;
+        }
+
+        public void setEmpty(boolean empty) {
+            this.empty = empty;
+        }
 
         public String getStart() {
             return start;

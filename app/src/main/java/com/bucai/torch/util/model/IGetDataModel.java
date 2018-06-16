@@ -27,5 +27,7 @@ public interface IGetDataModel {
     void getData(String dataType, final GetDataModel.GetDataListener<AVObject> listener);
     void getTeachersList(GetDataModel.GetDataListener<Teacher> getDataListener);
     Teacher getTeacher(String objectId) throws AVException, FileNotFoundException;
+    Teacher getTeacherSchedule(String objectId) throws AVException, FileNotFoundException;
+    Teacher getTeacherSchedule(Teacher teacher) throws AVException;
 }
 
