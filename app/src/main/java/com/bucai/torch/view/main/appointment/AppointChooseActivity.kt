@@ -37,7 +37,12 @@ class AppointChooseActivity : BaseActivity() {
         setTimeChooseLayout()//时间选择
         appoint_choose_submit.setOnClickListener {
             if (time.isNotEmpty() && dayTime.isNotEmpty()) {
-                startActivity(Intent(this@AppointChooseActivity, AppointCompleteActivity::class.java))
+                val intent = Intent(this@AppointChooseActivity, AppointCompleteActivity::class.java)
+                intent.putExtra("way", way)
+                intent.putExtra("time", time)
+                intent.putExtra("teacher", teacher)
+                intent.putExtra("dayTime", dayTime)
+                startActivity(intent)
             } else {
                 if (time.isEmpty()) ToastEx.warning(this@AppointChooseActivity, "请选择具体时间").show()
                 if (dayTime.isEmpty()) ToastEx.warning(this@AppointChooseActivity, "请选择日期").show()
