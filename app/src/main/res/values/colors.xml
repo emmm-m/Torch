@@ -8,6 +8,9 @@
     <color name="orange">#FD6438</color>
     <color name="red">#ff0000</color>
     <color name="white">#ffffff</color>
+    <color name="textDeep">#333</color>
+    <color name="textMid">#666</color>
+    <color name="textLight">#999</color>
     <!--reds-->
     <color name="md_red_50">#FFEBEE</color>
     <color name="md_red_100">#FFCDD2</color>

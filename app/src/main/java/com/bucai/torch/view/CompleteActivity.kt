@@ -8,12 +8,12 @@ import android.net.Uri
 import android.provider.MediaStore
 import com.avos.avoscloud.AVException
 import com.bucai.torch.R
-import com.bucai.torch.util.MyGlideEngine
 import com.bucai.torch.util.model.IUserModel
 import com.bucai.torch.util.model.UserModel
 import com.bucai.torch.view.base.BaseActivity
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
+import com.zhihu.matisse.engine.impl.GlideEngine
 import kotlinx.android.synthetic.main.activity_complete.*
 
 class CompleteActivity : BaseActivity() {
@@ -59,7 +59,7 @@ class CompleteActivity : BaseActivity() {
                     .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
                     .thumbnailScale(0.85f)
                     .theme(R.style.Matisse_Dracula)
-                    .imageEngine(MyGlideEngine())
+                    .imageEngine(GlideEngine())
                     .forResult(GET_IMAGE)
         }
     }

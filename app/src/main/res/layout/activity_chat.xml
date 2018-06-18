@@ -1,0 +1,135 @@
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/md_white_1000"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                 android:layout_width="match_parent"
+                 android:layout_height="50dp"
+                 android:background="@color/colorPrimary"
+                 android:orientation="horizontal"
+        >
+
+        <ImageView
+            android:id="@+id/back_header"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:padding="5dp"
+            android:src="@drawable/back"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/header_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="title"
+            android:textColor="@color/md_white_1000"
+            android:textSize="18dp"/>
+
+        <ImageView
+            android:id="@+id/right_header"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:layout_marginRight="20dp"
+            android:adjustViewBounds="true"
+            android:padding="12dp"
+            android:visibility="gone"
+            />
+    </FrameLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/list_chat"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_above="@+id/edit_layout"
+        android:layout_below="@+id/bar_chat"
+        android:layout_marginBottom="1dp"
+        android:layout_weight="1"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@+id/edit_layout"
+        android:background="@color/textLight"/>
+
+    <LinearLayout
+        android:id="@+id/edit_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/md_white_1000"
+        android:orientation="horizontal"
+        android:padding="4dp"
+        >
+
+
+        <ImageView
+            android:id="@+id/img_audio"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:padding="3dp"
+            android:src="@drawable/ic_voice_public"/>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="6dp"
+            android:layout_weight="5"
+            android:minHeight="30dp">
+
+            <EditText
+                android:id="@+id/edit_chat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_edit"
+                android:minHeight="30dp"
+                android:padding="6dp"
+                android:textSize="14sp"/>
+
+            <Button
+                android:id="@+id/record_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_tag"
+                android:minHeight="30dp"
+                android:padding="6dp"
+                android:text="按住  录音"
+                android:textColor="@color/textLight"
+                android:textSize="@dimen/app_text_size_medium"
+                android:visibility="gone"/>
+        </FrameLayout>
+
+        <ImageView
+            android:id="@+id/img_picker"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="5dp"
+            android:padding="3dp"
+            android:src="@drawable/ic_photo"/>
+
+        <TextView
+            android:id="@+id/send_btn_chat"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/background_tag_grey"
+            android:gravity="center"
+            android:padding="6dp"
+            android:text="发送"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/app_text_size_small"/>
+    </LinearLayout>
+
+</LinearLayout>

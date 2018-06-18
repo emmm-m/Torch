@@ -11,9 +11,9 @@ class WebActivity : BaseActivity() {
     override fun initData() {
         val title = intent.getStringExtra("tittle")
         val url = intent.getStringExtra("url")
-        back_header.visibility = View.VISIBLE
-        header_title.text = title
-        back_header.setOnClickListener { finish() }
+        back_header_web.visibility = View.VISIBLE
+        header_title_web.text = title
+        back_header_web.setOnClickListener { finish() }
         webView.loadUrl(url)
     }
 
