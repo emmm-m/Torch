@@ -1,5 +1,6 @@
 package com.bucai.torch.view.main.home
 
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,10 +11,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.avos.avoscloud.AVException
 import com.avos.avoscloud.AVObject
+import com.avos.avoscloud.im.v2.AVIMConversation
+import com.avos.avoscloud.im.v2.AVIMException
 import com.bucai.torch.R
 import com.bucai.torch.bean.Teacher
 import com.bucai.torch.util.model.GetDataModel
 import com.bucai.torch.util.model.IGetDataModel
+import com.bucai.torch.util.model.MessageModel
+import com.bucai.torch.view.message.MessageActivity
 import com.bumptech.glide.Glide
 import com.jude.rollviewpager.RollPagerView
 
@@ -65,7 +70,40 @@ class HomeRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
-            is SearchHolder -> holder.location.text = "重庆"
+            is SearchHolder -> {
+                MessageModel.getInstance().getConversation(object : MessageModel.QueryCallback{
+                    override fun start() {
+//                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    }
+
+                    override fun error(e: AVIMException?) {
+//                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    }
+
+                    override fun finish(list: MutableList<AVIMConversation>?) {
+                        val list = list as MutableList<AVIMConversation>
+                        run {
+                            var i = 0
+                            while (i < list.size) {
+                                if (list[i].lastMessage == null) {
+                                    list.removeAt(i)
+                                    i -= 1
+                                }
+                                i++
+                            }
+                        }
+                        Log.d("///",list.toString())
+                        if (list.isNotEmpty()) {
+                            holder.message.setImageResource(R.mipmap.message_red)
+                        }
+                    }
+
+                })
+                holder.location.text = "重庆"
+                holder.message.setOnClickListener {
+                    holder.itemView.context.startActivity(Intent(holder.itemView.context, MessageActivity::class.java))
+                }
+            }
             is GallaryHolder -> {
                 getDataModel.getRollPics(object : GetDataModel.GetDataListener<AVObject> {
                     override fun onStart() {
@@ -114,7 +152,7 @@ class HomeRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     class SearchHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var location: TextView = itemView.findViewById(R.id.item_home_rv_search_location)
         var editText: EditText = itemView.findViewById(R.id.item_home_rv_search_editText)
-        var imageView: ImageView = itemView.findViewById(R.id.item_home_rv_search_imageView)
+        var message: ImageView = itemView.findViewById(R.id.item_home_rv_search_message)
     }
 
     class GallaryHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

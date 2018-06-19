@@ -26,10 +26,10 @@
         android:hint="搜索老师" />
 
     <ImageView
-        android:id="@+id/item_home_rv_search_imageView"
+        android:id="@+id/item_home_rv_search_message"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_gravity="center"
         android:padding="10dp"
-        android:src="@mipmap/message_red" />
+        android:src="@mipmap/message" />
 </LinearLayout>
