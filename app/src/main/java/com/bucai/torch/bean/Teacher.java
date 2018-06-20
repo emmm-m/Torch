@@ -1,6 +1,9 @@
 package com.bucai.torch.bean;
 
 import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVObject;
+import com.avos.avoscloud.AVQuery;
+import com.avos.avoscloud.GetCallback;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -19,7 +22,7 @@ public class Teacher implements Serializable {
     private int star;
     private int year;
     private int certification;
-    private int price;
+    private String price = "";
     private String simpleIntroduce;
     private String completeIntroduce;
     private FreeTime freeTime;
@@ -142,11 +145,11 @@ public class Teacher implements Serializable {
         this.certification = certification;
     }
 
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 

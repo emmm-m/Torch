@@ -1,7 +1,5 @@
 package com.bucai.torch.view.main.home
 
-import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -25,6 +23,11 @@ import com.bucai.torch.util.leancloud.GetDataModel
 import com.bucai.torch.util.leancloud.IGetDataModel
 import com.bucai.torch.util.leancloud.MessageModel
 import com.bucai.torch.util.network.HttpUtil
+import com.bucai.torch.bean.Teacher
+import com.bucai.torch.util.ThreadPool
+import com.bucai.torch.util.model.GetDataModel
+import com.bucai.torch.util.model.IGetDataModel
+import com.bucai.torch.util.model.MessageModel
 import com.bucai.torch.view.message.MessageActivity
 import com.bucai.torch.view.teacher.TeacherDetailActivity
 import com.bumptech.glide.Glide
@@ -126,7 +129,6 @@ class HomeRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                         })
 
                 holder.location.text = "重庆"
-
                 holder.message.setOnClickListener {
                     holder.itemView.context.startActivity(Intent(holder.itemView.context, MessageActivity::class.java))
                 }
