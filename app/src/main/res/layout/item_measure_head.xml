@@ -44,19 +44,13 @@
                         android:textSize="20sp" />
 
                     <TextView
+                        android:id="@+id/item_measure_head_xinlipinggu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:gravity="center"
-                        android:text="行为|认知能力|人格特质"
                         android:textColor="@color/md_black_1000" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="自我评估"
-                        android:textColor="@color/md_black_1000" />
                 </LinearLayout>
 
                 <TextView
@@ -69,7 +63,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical"
-                    android:padding="10dp">
+                    android:padding="5dp">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -80,19 +74,13 @@
                         android:textSize="20sp" />
 
                     <TextView
+                        android:id="@+id/item_measure_head_zhinengpipei"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:gravity="center"
-                        android:text="为您寻找最适合的"
                         android:textColor="@color/md_black_1000" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="心理咨询师"
-                        android:textColor="@color/md_black_1000" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -130,20 +118,12 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:ellipsize="end"
-                        android:singleLine="true"
-                        android:text="心理咨询是什么?如何挑选合适的咨询师?"
-                        android:textSize="12sp" />
-
-                    <TextView
+                        android:id="@+id/item_measure_head_zixunzhinan"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="6dp"
                         android:ellipsize="end"
-                        android:singleLine="true"
-                        android:text="火炬如何进行专业保障"
+                        android:layout_gravity="center"
+                        android:text=""
                         android:textSize="12sp" />
 
                 </LinearLayout>

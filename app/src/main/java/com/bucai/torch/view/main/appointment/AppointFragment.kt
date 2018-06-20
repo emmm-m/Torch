@@ -1,6 +1,8 @@
 package com.bucai.torch.view.main.appointment
 
 
+import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -17,6 +19,7 @@ import com.avos.avoscloud.AVObject
 import com.avos.avoscloud.FindCallback
 import com.bucai.torch.R
 import com.bucai.torch.bean.Teacher
+import com.bucai.torch.util.ThreadPool
 import com.bucai.torch.util.model.GetDataModel
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_appoint.*
@@ -61,6 +64,7 @@ class AppointFragment : Fragment() {
         private var list = ArrayList<Teacher>()
         private val NORMAL = -1
         private val HEAD = -2
+        private val model = GetDataModel()
 
         fun fresh(list: ArrayList<Teacher>) {
             this.list = list
@@ -92,6 +96,7 @@ class AppointFragment : Fragment() {
             return list.size + 1
         }
 
+        @SuppressLint("SetTextI18n")
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
             when (holder) {
                 is NormalHolder -> {
@@ -103,16 +108,28 @@ class AppointFragment : Fragment() {
                     }
                     holder.name.text = teacher.name.toString()
                     holder.price.text = teacher.price
+                    holder.introduce.text = teacher.simpleIntroduce
                     Glide.with(holder.itemView.context).load(teacher.head).into(holder.head)
                 }
                 is HeadHolder -> {
-
+                    ThreadPool.instance.cachedThreadPool.execute {
+                        val zixunzhinan = model.getStringRes("咨询指南")
+                        val zhinengpipei = model.getStringRes("智能匹配")
+                        val xinlipinggu = model.getStringRes("心理评估")
+                        (holder.itemView.context as Activity).runOnUiThread {
+                            holder.zixunzhinan.text = zixunzhinan
+                            holder.zhinengpipei.text = zhinengpipei
+                            holder.xinlipinggu.text = xinlipinggu
+                        }
+                    }
                 }
             }
         }
 
         class HeadHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
+            val zixunzhinan = itemView.findViewById<TextView>(R.id.item_measure_head_zixunzhinan)
+            val zhinengpipei = itemView.findViewById<TextView>(R.id.item_measure_head_zhinengpipei)
+            val xinlipinggu = itemView.findViewById<TextView>(R.id.item_measure_head_xinlipinggu)
         }
 
         class NormalHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -121,6 +138,7 @@ class AppointFragment : Fragment() {
             val location = itemView.findViewById<TextView>(R.id.item_home_rv_normal_address)
             val price = itemView.findViewById<TextView>(R.id.item_home_rv_normal_price)
             val star = itemView.findViewById<TextView>(R.id.item_home_rv_normal_star)
+            val introduce = itemView.findViewById<TextView>(R.id.item_home_rv_normal_introduce)
         }
     }
 }

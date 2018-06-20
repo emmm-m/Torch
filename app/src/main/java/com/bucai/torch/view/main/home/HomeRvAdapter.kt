@@ -1,5 +1,6 @@
 package com.bucai.torch.view.main.home
 
+import android.app.Activity
 import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -15,6 +16,7 @@ import com.avos.avoscloud.im.v2.AVIMConversation
 import com.avos.avoscloud.im.v2.AVIMException
 import com.bucai.torch.R
 import com.bucai.torch.bean.Teacher
+import com.bucai.torch.util.ThreadPool
 import com.bucai.torch.util.model.GetDataModel
 import com.bucai.torch.util.model.IGetDataModel
 import com.bucai.torch.util.model.MessageModel
@@ -71,7 +73,7 @@ class HomeRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is SearchHolder -> {
-                MessageModel.getInstance().getConversation(object : MessageModel.QueryCallback{
+                MessageModel.getInstance().getConversation(object : MessageModel.QueryCallback {
                     override fun start() {
 //                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                     }
@@ -92,7 +94,7 @@ class HomeRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                                 i++
                             }
                         }
-                        Log.d("///",list.toString())
+                        Log.d("///", list.toString())
                         if (list.isNotEmpty()) {
                             holder.message.setImageResource(R.mipmap.message_red)
                         }
@@ -121,7 +123,15 @@ class HomeRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             }
             is AdjustHolder -> {
-
+                ThreadPool.instance.cachedThreadPool.execute {
+                    val leftUrl = getDataModel.getImageUrl("情绪调节左")
+                    val rightUrl = getDataModel.getImageUrl("情绪调节右")
+                    val context = holder.itemView.context
+                    (context as Activity).runOnUiThread {
+                        Glide.with(context).load(leftUrl).into(holder.leftImg)
+                        Glide.with(context).load(rightUrl).into(holder.rightImg)
+                    }
+                }
             }
             is ClassifyHolder -> {
 
@@ -160,7 +170,11 @@ class HomeRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 //        val pagerCircle: PagerCircle = itemView.findViewById(R.id.item_home_rv_gallary_pagerCircle)
     }
 
-    class AdjustHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    class AdjustHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val leftImg = itemView.findViewById<ImageView>(R.id.item_home_rv_adjust_left)
+        val rightImg = itemView.findViewById<ImageView>(R.id.item_home_rv_adjust_right)
+    }
+
     class ClassifyHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     class NormalHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

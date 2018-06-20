@@ -76,7 +76,7 @@ class MainActivity : BaseActivity() {
                 .bindTarget(bnve.getBottomNavigationItemView(position))
                 .setOnDragStateChangedListener { dragState, _, _ ->
                     if (Badge.OnDragStateChangedListener.STATE_SUCCEED == dragState) {
-                        Toast.makeText(this@MainActivity, "drag", Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(this@MainActivity, "drag", Toast.LENGTH_SHORT).show()
                     }
                 }
     }

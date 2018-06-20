@@ -23,6 +23,8 @@ public class Teacher implements Serializable {
     private int year;
     private int certification;
     private String price = "";
+    private String simpleIntroduce;
+    private String completeIntroduce;
     private FreeTime freeTime;
     private String head = "";
     private String objectId = "";
@@ -39,10 +41,28 @@ public class Teacher implements Serializable {
                 ", year=" + year +
                 ", certification=" + certification +
                 ", price='" + price + '\'' +
+                ", simpleIntroduce='" + simpleIntroduce + '\'' +
+                ", completeIntroduce='" + completeIntroduce + '\'' +
                 ", freeTime=" + freeTime +
                 ", head='" + head + '\'' +
                 ", objectId='" + objectId + '\'' +
                 '}';
+    }
+
+    public String getSimpleIntroduce() {
+        return simpleIntroduce;
+    }
+
+    public void setSimpleIntroduce(String simpleIntroduce) {
+        this.simpleIntroduce = simpleIntroduce;
+    }
+
+    public String getCompleteIntroduce() {
+        return completeIntroduce;
+    }
+
+    public void setCompleteIntroduce(String completeIntroduce) {
+        this.completeIntroduce = completeIntroduce;
     }
 
     public String getHead() {

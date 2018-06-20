@@ -285,11 +285,11 @@
                 android:textSize="20sp" />
 
             <TextView
+                android:id="@+id/tea_info_complete_introduce"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:padding="15dp"
-                android:text="    北京大学《精神病与精神卫生学》心理咨询研究方向硕士研究生毕业。曾先后参加过北京大学举办的“全国心理治疗师强化班”系统培训;德中心理治疗研究院举办的为期三年的“德中高级家庭治疗师连续培训项目”;德中心理治疗研究院举办的为期三年的“精神分析治疗师连续培训项目”接受过家族系统排列、萨提亚家庭治疗专业课程系统训练;婚姻家庭治疗小组系统训练;欧文亚隆(Irvin Yalom, M.D.)团体心理咨询与治疗体系连续培训项目专业训练;国际音乐治疗与心理剧培训;箱庭疗法培训;创伤与危机干预实操技能训练;叙事治疗技术及焦点治疗技术的专业训练;NLP简快身心积极疗法培训;催眠与心理咨询意象对话技术训练; EAP企业员工心理辅导课程;接受过小组督导和自我体验。"
                 android:textColor="#888888" />
         </LinearLayout>
     </ScrollView>

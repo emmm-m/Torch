@@ -1,5 +1,6 @@
 package com.bucai.torch.view.main.appointment
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -16,12 +17,14 @@ import kotlinx.android.synthetic.main.activity_tea_info.*
 class TeaInfoActivity : AppCompatActivity() {
 
     private lateinit var teacher: Teacher
+    private lateinit var progressDialog: ProgressDialog
     private val dark = Color.parseColor("#808080")
     private val red = Color.parseColor("#DD7049")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tea_info)
+        progressDialog = ProgressDialog.show(this@TeaInfoActivity, "正在加载", "请等待")
         teacher = intent.getSerializableExtra("teacher") as Teacher
         tea_info_name.text = teacher.name
         tea_info_price.text = teacher.price
@@ -37,15 +40,17 @@ class TeaInfoActivity : AppCompatActivity() {
             ToastEx.info(this@TeaInfoActivity, "正在加载教师资源，请等待").show()
         }
         ThreadPool.instance.cachedThreadPool.execute {
-            teacher = GetDataModel().getTeacherSchedule(teacher)
+            teacher = GetDataModel().getTeacherDetail(teacher)
+            progressDialog.dismiss()
             tea_info_appointLayout.setOnClickListener {
-                showAppointment()
+                runOnUiThread { showAppointment() }
             }
             tea_info_learnMore.setOnClickListener {
                 val intent = Intent(this@TeaInfoActivity, AppointChooseActivity::class.java)
                 intent.putExtra("teacher", teacher)
                 startActivity(intent)
             }
+            runOnUiThread { tea_info_complete_introduce.text = teacher.completeIntroduce }
         }
     }
 
@@ -97,5 +102,12 @@ class TeaInfoActivity : AppCompatActivity() {
             f.add(t)
         }
         return f.distinct()
+    }
+
+    override fun onDestroy() {
+        if (progressDialog.isShowing){
+            progressDialog.dismiss()
+        }
+        super.onDestroy()
     }
 }

@@ -266,27 +266,52 @@ public class GetDataModel implements IGetDataModel {
     }
 
     @Override
-    public Teacher getTeacherSchedule(String objectId) throws AVException, FileNotFoundException {
+    public Teacher getTeacherDetail(String objectId) throws AVException, FileNotFoundException {
         AVQuery avQuery = new AVQuery("Teacher");
         return convert(avQuery.get(objectId), true);
     }
 
     @Override
-    public Teacher getTeacherSchedule(Teacher teacher) throws AVException {
+    public Teacher getTeacherDetail(Teacher teacher) throws AVException {
         AVQuery<AVObject> avQuery = new AVQuery<>("Teacher");
         avQuery.whereEqualTo("objectId", teacher.getObjectId());
-        teacher.setFreeTime(new Gson().fromJson(avQuery.find().get(0).getString("freeTime"), FreeTime.class));
+        AVObject avObject = avQuery.find().get(0);
+        teacher.setFreeTime(new Gson().fromJson(avObject.getString("freeTime"), FreeTime.class));
+        teacher.setCompleteIntroduce(avObject.getString("completeIntroduce"));
         return teacher;
     }
 
-    private Teacher convert(AVObject avObject, boolean getSchedule) throws AVException, FileNotFoundException {
+    @Override
+    public String getImageUrl(String fileName) throws AVException, FileNotFoundException {
+        AVQuery<AVObject> avQuery = new AVQuery<>("ImageRes");
+        avQuery.whereEqualTo("name", fileName);
+        AVFile avFile = avQuery.find().get(0).getAVFile("file");
+        if (avFile == null) return "";
+        String url = AVFile.withObjectId(avFile.getObjectId()).getUrl();
+        if (url == null) return "";
+        return url;
+    }
+
+    @Override
+    public String getStringRes(String sName) throws AVException {
+        AVQuery<AVObject> avQuery = new AVQuery<>("StringRes");
+        avQuery.whereEqualTo("name", sName);
+        AVObject avObject = avQuery.find().get(0);
+        if (avObject == null) return "";
+        return avObject.getString("value");
+    }
+
+    private Teacher convert(AVObject avObject, boolean detail) throws AVException, FileNotFoundException {
         Gson gson = new Gson();
         Teacher teacher = new Teacher();
         teacher.setAge((int) avObject.get("age"));
         teacher.setCertification((int) avObject.get("certification"));
         teacher.setDescription((ArrayList<String>) avObject.get("description"));
-        if (getSchedule)
+        teacher.setSimpleIntroduce(avObject.getString("simpleIntroduce"));
+        if (detail) {
             teacher.setFreeTime(gson.fromJson((String) avObject.get("freeTime"), FreeTime.class));
+            teacher.setCompleteIntroduce(avObject.getString("completeIntroduce"));
+        }
         teacher.setName((String) avObject.get("name"));
         teacher.setPhone((String) avObject.get("phone"));
         teacher.setPrice((String) avObject.get("price"));
