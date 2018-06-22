@@ -2,8 +2,8 @@ package com.bucai.torch.view.message;
 
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.im.v2.AVIMConversation;
-import com.bucai.torch.util.model.GetDataModel;
-import com.bucai.torch.util.model.MessageModel;
+import com.bucai.torch.util.leancloud.GetDataModel;
+import com.bucai.torch.util.leancloud.MessageModel;
 
 /**
  * Created by zxzhu on 2017/8/21.

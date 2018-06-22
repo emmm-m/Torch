@@ -15,12 +15,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.avos.avoscloud.AVException
-import com.avos.avoscloud.AVObject
-import com.avos.avoscloud.FindCallback
 import com.bucai.torch.R
 import com.bucai.torch.bean.Teacher
 import com.bucai.torch.util.ThreadPool
-import com.bucai.torch.util.model.GetDataModel
+import com.bucai.torch.util.leancloud.GetDataModel
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_appoint.*
 
@@ -107,7 +105,7 @@ class AppointFragment : Fragment() {
                         holder.itemView.context.startActivity(intent)
                     }
                     holder.name.text = teacher.name.toString()
-                    holder.price.text = teacher.price
+                    holder.price.text = ""+teacher.price
                     holder.introduce.text = teacher.simpleIntroduce
                     Glide.with(holder.itemView.context).load(teacher.head).into(holder.head)
                 }

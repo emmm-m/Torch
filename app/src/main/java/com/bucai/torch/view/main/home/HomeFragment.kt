@@ -12,8 +12,8 @@ import android.widget.Toast
 import com.avos.avoscloud.AVException
 import com.bucai.torch.R
 import com.bucai.torch.bean.Teacher
-import com.bucai.torch.util.model.GetDataModel
-import com.bucai.torch.util.model.IGetDataModel
+import com.bucai.torch.util.leancloud.GetDataModel
+import com.bucai.torch.util.leancloud.IGetDataModel
 import kotlinx.android.synthetic.main.fragment_home.*
 
 /**
@@ -51,6 +51,7 @@ class HomeFragment : Fragment() {
                 }
             }
         })
+
     }
 }
 

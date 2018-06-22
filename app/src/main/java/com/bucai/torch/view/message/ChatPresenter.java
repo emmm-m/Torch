@@ -5,9 +5,9 @@ import com.avos.avoscloud.im.v2.AVIMConversation;
 import com.avos.avoscloud.im.v2.AVIMException;
 import com.avos.avoscloud.im.v2.AVIMMessage;
 import com.avos.avoscloud.im.v2.callback.AVIMMessagesQueryCallback;
-import com.bucai.torch.util.model.GetDataModel;
-import com.bucai.torch.util.model.IGetDataModel;
-import com.bucai.torch.util.model.MessageModel;
+import com.bucai.torch.util.leancloud.GetDataModel;
+import com.bucai.torch.util.leancloud.IGetDataModel;
+import com.bucai.torch.util.leancloud.MessageModel;
 
 import java.util.List;
 

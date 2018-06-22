@@ -11,8 +11,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.avos.avoscloud.AVException
 import com.bucai.torch.R
-import com.bucai.torch.util.model.IUserModel
-import com.bucai.torch.util.model.UserModel
+import com.bucai.torch.util.leancloud.IUserModel
+import com.bucai.torch.util.leancloud.UserModel
 import com.bucai.torch.view.main.MainActivity
 import com.bucai.torch.view.main.home.toast
 import kotlinx.android.synthetic.main.fragment_signin.*

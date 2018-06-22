@@ -5,7 +5,7 @@ import android.util.Log
 import android.view.View
 import com.avos.avoscloud.im.v2.AVIMConversation
 import com.bucai.torch.R
-import com.bucai.torch.util.model.MessageModel
+import com.bucai.torch.util.leancloud.MessageModel
 import com.bucai.torch.view.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_message.*
 import kotlinx.android.synthetic.main.header_include.*

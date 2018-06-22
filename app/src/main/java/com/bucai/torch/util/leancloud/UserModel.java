@@ -1,4 +1,4 @@
-package com.bucai.torch.util.model;
+package com.bucai.torch.util.leancloud;
 
 import android.content.Context;
 import android.graphics.Bitmap;

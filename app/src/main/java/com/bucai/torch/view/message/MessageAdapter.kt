@@ -15,7 +15,7 @@ import com.avos.avoscloud.AVUser
 import com.avos.avoscloud.im.v2.AVIMConversation
 import com.avos.avoscloud.im.v2.messages.AVIMTextMessage
 import com.bucai.torch.R
-import com.bucai.torch.util.model.GetDataModel
+import com.bucai.torch.util.leancloud.GetDataModel
 import com.bumptech.glide.Glide
 import de.hdodenhof.circleimageview.CircleImageView
 import org.json.JSONException

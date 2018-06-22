@@ -10,8 +10,8 @@ import android.view.ViewGroup
 import com.avos.avoscloud.AVException
 import com.avos.avoscloud.AVObject
 import com.bucai.torch.R
-import com.bucai.torch.util.model.GetDataModel
-import com.bucai.torch.util.model.IGetDataModel
+import com.bucai.torch.util.leancloud.GetDataModel
+import com.bucai.torch.util.leancloud.IGetDataModel
 import com.bucai.torch.view.main.home.log
 import kotlinx.android.synthetic.main.fragment_czjy.*
 
