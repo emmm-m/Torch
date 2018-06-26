@@ -1,5 +1,6 @@
 package com.bucai.torch.view.main.home
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.support.v7.widget.RecyclerView
@@ -15,15 +16,17 @@ import com.avos.avoscloud.AVObject
 import com.avos.avoscloud.im.v2.AVIMConversation
 import com.avos.avoscloud.im.v2.AVIMException
 import com.bucai.torch.R
+import com.bucai.torch.bean.Lecturer
 import com.bucai.torch.bean.Location
-import com.bucai.torch.bean.Teacher
 import com.bucai.torch.util.LocationUtils
 import com.bucai.torch.util.ThreadPool
+import com.bucai.torch.util.getStar
 import com.bucai.torch.util.leancloud.GetDataModel
 import com.bucai.torch.util.leancloud.IGetDataModel
 import com.bucai.torch.util.leancloud.MessageModel
 import com.bucai.torch.util.network.HttpUtil
 import com.bucai.torch.view.message.MessageActivity
+import com.bucai.torch.view.teacher.TeacherDetailActivity
 import com.bumptech.glide.Glide
 import com.jude.rollviewpager.RollPagerView
 import rx.Subscriber
@@ -38,11 +41,11 @@ class HomeRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val ADJUST = 2
     private val CLASSIFY = 3
     private val NORMAL = 4
-    private var teachers = ArrayList<Teacher>()
+    private var lecturers = ArrayList<Lecturer>()
     private val getDataModel: IGetDataModel = GetDataModel()
 
-    fun freshTeacher(teachers: ArrayList<Teacher>) {
-        this.teachers = teachers
+    fun freshLecturer(lecturers: ArrayList<Lecturer>) {
+        this.lecturers = lecturers
         notifyDataSetChanged()
     }
 
@@ -74,16 +77,15 @@ class HomeRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         return NormalHolder(view)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is SearchHolder -> {
                 MessageModel.getInstance().getConversation(object : MessageModel.QueryCallback {
                     override fun start() {
-//                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                     }
 
                     override fun error(e: AVIMException?) {
-//                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                     }
 
                     override fun finish(list: MutableList<AVIMConversation>?) {
@@ -108,7 +110,7 @@ class HomeRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 val http = HttpUtil()
                 http.getCity(LocationUtils.getInstance(holder.itemView.context)!!.showLocation()!!.longitude,
                         LocationUtils.getInstance(holder.itemView.context)!!.showLocation()!!.longitude)
-                        .subscribe(object : Subscriber<Location>(){
+                        .subscribe(object : Subscriber<Location>() {
                             override fun onNext(t: Location?) {
                                 holder.location.text = t!!.data.address_components[1].short_name
                             }
@@ -160,16 +162,22 @@ class HomeRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             }
             is NormalHolder -> {
-                val teacher = teachers[position - 4]
-                holder.name.text = teacher.name.toString()
-                holder.price.text = ""+teacher.price
-                Glide.with(holder.itemView.context).load(teacher.head).into(holder.head)
+                val lecturer = lecturers[position - 4]
+                holder.star.text = getStar(lecturer.star)
+                holder.name.text = lecturer.teaName
+                holder.price.text = "${lecturer.price}元"
+                Glide.with(holder.itemView.context).load(lecturer.head).into(holder.head)
+                holder.itemView.setOnClickListener {
+                    val intent = Intent(holder.itemView.context, TeacherDetailActivity::class.java)
+                    intent.putExtra("lecturer", lecturer)
+                    holder.itemView.context.startActivity(intent)
+                }
             }
         }
     }
 
     override fun getItemCount(): Int {
-        return teachers.size + 4
+        return lecturers.size + 4
     }
 
     override fun getItemViewType(position: Int): Int {

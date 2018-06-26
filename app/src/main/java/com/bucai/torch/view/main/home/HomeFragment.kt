@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.avos.avoscloud.AVException
 import com.bucai.torch.R
-import com.bucai.torch.bean.Teacher
+import com.bucai.torch.bean.Lecturer
 import com.bucai.torch.util.leancloud.GetDataModel
 import com.bucai.torch.util.leancloud.IGetDataModel
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -35,7 +35,7 @@ class HomeFragment : Fragment() {
         adapter = HomeRvAdapter()
         home_rv.adapter = adapter
         home_rv.layoutManager = LinearLayoutManager(context)
-        GetDataModel().getTeachersList(object : GetDataModel.GetDataListener<Teacher> {
+        GetDataModel().getLecturerList(object : GetDataModel.GetDataListener<Lecturer> {
             override fun onStart() {
 
             }
@@ -44,14 +44,14 @@ class HomeFragment : Fragment() {
                 e?.printStackTrace()
             }
 
-            override fun onFinish(list: MutableList<Teacher>?) {
+            override fun onFinish(list: MutableList<Lecturer>?) {
                 Log.e("zia", list?.toString())
                 this@HomeFragment.activity?.runOnUiThread {
-                    adapter.freshTeacher(list as ArrayList<Teacher>)
+                    adapter.freshLecturer(list as ArrayList<Lecturer>)
                 }
             }
-        })
 
+        })
     }
 }
 
