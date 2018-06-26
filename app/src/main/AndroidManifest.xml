@@ -40,9 +40,9 @@
         <activity android:name=".view.CompleteActivity" />
         <activity android:name=".view.main.appointment.AppointChooseActivity" />
         <activity android:name=".view.main.appointment.AppointCompleteActivity" />
-        <activity android:name=".view.message.MessageActivity"></activity>
-        <activity android:name=".view.message.ChatActivity"></activity>
-        <activity android:name=".view.PhotoActivity"></activity>
+        <activity android:name=".view.message.MessageActivity" />
+        <activity android:name=".view.message.ChatActivity" />
+        <activity android:name=".view.PhotoActivity" />
 
         <!-- 实时通信模块、推送（均需要加入以下声明） START -->
         <!-- 实时通信模块、推送都要使用 PushService -->
@@ -57,7 +57,10 @@
         </receiver>
         <!-- 实时通信模块、推送 END -->
 
-        <activity android:name=".view.teacher.TeacherDetailActivity"></activity>
+        <activity android:name=".view.teacher.TeacherDetailActivity" />
+        <activity
+            android:name=".view.teacher.TeacherPriceActivity"
+            android:theme="@style/Translucent" />
     </application>
 
 </manifest>

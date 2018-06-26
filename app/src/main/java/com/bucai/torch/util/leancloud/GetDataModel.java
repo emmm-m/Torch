@@ -95,8 +95,9 @@ public class GetDataModel implements IGetDataModel {
         lecturer.setTeaName(avObject.getString("teaName"));
         AVGeoPoint avGeoPoint = avObject.getAVGeoPoint("location");
         lecturer.setLatitude(avGeoPoint.getLatitude());
-        lecturer.setLongtitude(avGeoPoint.getLongitude());
+        lecturer.setLongitude(avGeoPoint.getLongitude());
         lecturer.setPrice(avObject.getInt("price"));
+        lecturer.setGrade(avObject.getList("grade"));
         AVFile head = avObject.getAVFile("header");
         if (head != null) {
             lecturer.setHead(AVFile.withObjectId(head.getObjectId()).getUrl());
