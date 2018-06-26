@@ -4,9 +4,9 @@ import android.util.Log
 import com.avos.avoscloud.AVUser
 import com.avos.avoscloud.im.v2.AVIMConversation
 import com.avos.avoscloud.im.v2.AVIMException
-import com.bucai.torch.util.model.GetDataModel
-import com.bucai.torch.util.model.IGetDataModel
-import com.bucai.torch.util.model.MessageModel
+import com.bucai.torch.util.leancloud.GetDataModel
+import com.bucai.torch.util.leancloud.IGetDataModel
+import com.bucai.torch.util.leancloud.MessageModel
 
 /**
  * Created by zxzhu on 2018/3/5.

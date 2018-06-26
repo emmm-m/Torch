@@ -1,4 +1,4 @@
-package com.bucai.torch.util.model;
+package com.bucai.torch.util.leancloud;
 
 import android.util.Log;
 
@@ -314,7 +314,7 @@ public class GetDataModel implements IGetDataModel {
         }
         teacher.setName((String) avObject.get("name"));
         teacher.setPhone((String) avObject.get("phone"));
-        teacher.setPrice((String) avObject.get("price"));
+        teacher.setPrice((Integer) avObject.get("price"));
         teacher.setSex((String) avObject.get("sex"));
         teacher.setStar((int) avObject.get("star"));
         teacher.setYear((int) avObject.get("year"));

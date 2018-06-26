@@ -9,7 +9,7 @@ import android.view.View
 import com.bucai.torch.R
 import com.bucai.torch.bean.Teacher
 import com.bucai.torch.util.ThreadPool
-import com.bucai.torch.util.model.GetDataModel
+import com.bucai.torch.util.leancloud.GetDataModel
 import com.bumptech.glide.Glide
 import com.zia.toastex.ToastEx
 import kotlinx.android.synthetic.main.activity_tea_info.*
@@ -27,7 +27,7 @@ class TeaInfoActivity : AppCompatActivity() {
         progressDialog = ProgressDialog.show(this@TeaInfoActivity, "正在加载", "请等待")
         teacher = intent.getSerializableExtra("teacher") as Teacher
         tea_info_name.text = teacher.name
-        tea_info_price.text = teacher.price
+        tea_info_price.text = ""+teacher.price
         Glide.with(this@TeaInfoActivity).load(teacher.head).into(tea_info_circleImage)
         showIntroduce()
         tea_info_introduceLayout.setOnClickListener {

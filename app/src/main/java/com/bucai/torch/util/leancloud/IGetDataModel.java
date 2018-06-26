@@ -1,14 +1,11 @@
-package com.bucai.torch.util.model;
+package com.bucai.torch.util.leancloud;
 
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVUser;
-import com.avos.avoscloud.FindCallback;
-import com.avos.avoscloud.GetCallback;
 import com.bucai.torch.bean.Teacher;
 
 import java.io.FileNotFoundException;
-import java.util.List;
 
 /**
  * Created by zxzhu on 2017/8/20.

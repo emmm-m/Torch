@@ -5,9 +5,9 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.view.ViewGroup
-import android.widget.Toast
 import com.avos.avoscloud.AVUser
 import com.bucai.torch.R
+import com.bucai.torch.util.LocationUtils
 import com.bucai.torch.util.SharedPreferencesUtils
 import com.bucai.torch.view.CompleteActivity
 import com.bucai.torch.view.EvaluatePrepareActivity
@@ -33,6 +33,7 @@ class MainActivity : BaseActivity() {
         setBottomNavigate()
         toPage()
         checkHasUserInfo()
+
     }
 
     private fun checkHasUserInfo() {

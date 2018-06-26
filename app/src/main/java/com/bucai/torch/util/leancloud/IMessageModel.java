@@ -1,4 +1,4 @@
-package com.bucai.torch.util.model;
+package com.bucai.torch.util.leancloud;
 
 import com.avos.avoscloud.im.v2.AVIMConversation;
 import com.avos.avoscloud.im.v2.callback.AVIMMessagesQueryCallback;

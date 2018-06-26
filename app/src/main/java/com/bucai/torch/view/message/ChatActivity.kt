@@ -23,7 +23,7 @@ import com.bucai.torch.R
 import com.bucai.torch.util.PermissionUnit
 import com.bucai.torch.util.RecordManager
 import com.bucai.torch.util.SystemUtil
-import com.bucai.torch.util.model.MessageModel
+import com.bucai.torch.util.leancloud.MessageModel
 import com.bucai.torch.view.base.BaseActivity
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType

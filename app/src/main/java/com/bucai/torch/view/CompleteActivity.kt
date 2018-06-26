@@ -8,8 +8,8 @@ import android.net.Uri
 import android.provider.MediaStore
 import com.avos.avoscloud.AVException
 import com.bucai.torch.R
-import com.bucai.torch.util.model.IUserModel
-import com.bucai.torch.util.model.UserModel
+import com.bucai.torch.util.leancloud.IUserModel
+import com.bucai.torch.util.leancloud.UserModel
 import com.bucai.torch.view.base.BaseActivity
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
