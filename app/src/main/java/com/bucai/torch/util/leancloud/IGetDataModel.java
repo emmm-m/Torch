@@ -3,6 +3,7 @@ package com.bucai.torch.util.leancloud;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVUser;
+import com.bucai.torch.bean.News;
 import com.bucai.torch.bean.Teacher;
 
 import java.io.FileNotFoundException;
@@ -26,7 +27,7 @@ public interface IGetDataModel {
     Teacher getTeacher(String objectId) throws AVException, FileNotFoundException;
     Teacher getTeacherDetail(String objectId) throws AVException, FileNotFoundException;
     Teacher getTeacherDetail(Teacher teacher) throws AVException;
-    String getImageUrl(String fileName) throws AVException, FileNotFoundException;
+    News getImage(String fileName) throws AVException, FileNotFoundException;
     String getStringRes(String sName) throws AVException;
 }
 

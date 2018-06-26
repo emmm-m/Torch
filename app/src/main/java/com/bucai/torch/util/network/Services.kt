@@ -13,5 +13,5 @@ import rx.Observable
  */
 interface Services {
     @GET(Apis.GET_CITY)
-    fun getCity(@Query("longitude") longitude: Double, @Query("latitude") latitude: Double): Observable<Location>
+    fun getCity(@Query("longitude") longitude: String, @Query("latitude") latitude: String): Observable<Location>
 }

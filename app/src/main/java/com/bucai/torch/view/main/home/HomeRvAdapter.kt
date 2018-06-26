@@ -16,13 +16,16 @@ import com.avos.avoscloud.im.v2.AVIMConversation
 import com.avos.avoscloud.im.v2.AVIMException
 import com.bucai.torch.R
 import com.bucai.torch.bean.Location
+import com.bucai.torch.bean.News
 import com.bucai.torch.bean.Teacher
 import com.bucai.torch.util.LocationUtils
+import com.bucai.torch.util.LogUtil
 import com.bucai.torch.util.ThreadPool
 import com.bucai.torch.util.leancloud.GetDataModel
 import com.bucai.torch.util.leancloud.IGetDataModel
 import com.bucai.torch.util.leancloud.MessageModel
 import com.bucai.torch.util.network.HttpUtil
+import com.bucai.torch.view.WebActivity
 import com.bucai.torch.view.message.MessageActivity
 import com.bumptech.glide.Glide
 import com.jude.rollviewpager.RollPagerView
@@ -106,9 +109,9 @@ class HomeRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
                 })
                 val http = HttpUtil()
-                http.getCity(LocationUtils.getInstance(holder.itemView.context)!!.showLocation()!!.longitude,
+                http.getCity(LocationUtils.getInstance(holder.itemView.context)!!.showLocation()!!.latitude,
                         LocationUtils.getInstance(holder.itemView.context)!!.showLocation()!!.longitude)
-                        .subscribe(object : Subscriber<Location>(){
+                        .subscribe(object : Subscriber<Location>() {
                             override fun onNext(t: Location?) {
                                 holder.location.text = t!!.data.address_components[1].short_name
                             }
@@ -118,12 +121,14 @@ class HomeRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                             }
 
                             override fun onError(e: Throwable?) {
+                                LogUtil.d("LocationError: ", e!!.message)
+                                LogUtil.d("LocationShow: ", "" + LocationUtils.getInstance(holder.itemView.context)!!.showLocation()!!.longitude
+                                        + " @@@ " + LocationUtils.getInstance(holder.itemView.context)!!.showLocation()!!.latitude)
 //                                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                                 holder.location.text = "获取位置失败"
                             }
                         })
 
-                holder.location.text = "重庆"
 
                 holder.message.setOnClickListener {
                     holder.itemView.context.startActivity(Intent(holder.itemView.context, MessageActivity::class.java))
@@ -146,14 +151,28 @@ class HomeRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             }
             is AdjustHolder -> {
+                var left: News? = null
+                var right: News? = null
                 ThreadPool.instance.cachedThreadPool.execute {
-                    val leftUrl = getDataModel.getImageUrl("情绪调节左")
-                    val rightUrl = getDataModel.getImageUrl("情绪调节右")
+                    left = getDataModel.getImage("情绪调节左")
+                    right = getDataModel.getImage("情绪调节右")
                     val context = holder.itemView.context
                     (context as Activity).runOnUiThread {
-                        Glide.with(context).load(leftUrl).into(holder.leftImg)
-                        Glide.with(context).load(rightUrl).into(holder.rightImg)
+                        Glide.with(context).load(left!!.picUrl).into(holder.leftImg)
+                        Glide.with(context).load(right!!.picUrl).into(holder.rightImg)
                     }
+                }
+                holder.leftImg.setOnClickListener {
+                    val intent = Intent(holder.itemView.context, WebActivity::class.java)
+                    intent.putExtra("tittle", left!!.tittle)
+                    intent.putExtra("url", left!!.url)
+                    holder.itemView.context.startActivity(intent)
+                }
+                holder.rightImg.setOnClickListener {
+                    val intent = Intent(holder.itemView.context, WebActivity::class.java)
+                    intent.putExtra("tittle", right!!.tittle)
+                    intent.putExtra("url", right!!.url)
+                    holder.itemView.context.startActivity(intent)
                 }
             }
             is ClassifyHolder -> {
@@ -162,7 +181,7 @@ class HomeRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             is NormalHolder -> {
                 val teacher = teachers[position - 4]
                 holder.name.text = teacher.name.toString()
-                holder.price.text = ""+teacher.price
+                holder.price.text = "" + teacher.price
                 Glide.with(holder.itemView.context).load(teacher.head).into(holder.head)
             }
         }

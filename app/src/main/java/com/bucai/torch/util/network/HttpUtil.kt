@@ -17,7 +17,7 @@ class HttpUtil {
         if (services == null) {
             services = SingleRetrofit.getRetrofit().create(Services::class.java)
         }
-        return services!!.getCity(longitude, latitude)
+        return services!!.getCity(longitude.toString(), latitude.toString())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
     }
