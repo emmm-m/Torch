@@ -22,7 +22,8 @@ public class Lecturer implements Serializable{
     private String completeIntroduce;//完整介绍
     private String simpleComment;//简单评论
     private int goodCommentCount;//好评数
-    private AVGeoPoint location;//位置1
+    private double longtitude;
+    private double latitude;
     private int price;//价格1
     private String head;//头像1
     private List<Comment> completeComment;//完整的评论，序列化字符串
@@ -40,13 +41,30 @@ public class Lecturer implements Serializable{
                 ", star=" + star +
                 ", teaName='" + teaName + '\'' +
                 ", completeIntroduce='" + completeIntroduce + '\'' +
-                ", simpleComment=" + simpleComment +
+                ", simpleComment='" + simpleComment + '\'' +
                 ", goodCommentCount=" + goodCommentCount +
-                ", location=" + location +
+                ", longtitude=" + longtitude +
+                ", latitude=" + latitude +
                 ", price=" + price +
                 ", head='" + head + '\'' +
                 ", completeComment=" + completeComment +
                 '}';
+    }
+
+    public double getLongtitude() {
+        return longtitude;
+    }
+
+    public void setLongtitude(double longtitude) {
+        this.longtitude = longtitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
     }
 
     public String getHead() {
@@ -159,14 +177,6 @@ public class Lecturer implements Serializable{
 
     public void setGoodCommentCount(int goodCommentCount) {
         this.goodCommentCount = goodCommentCount;
-    }
-
-    public AVGeoPoint getLocation() {
-        return location;
-    }
-
-    public void setLocation(AVGeoPoint location) {
-        this.location = location;
     }
 
     public int getPrice() {

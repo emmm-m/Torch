@@ -1,5 +1,6 @@
 package com.bucai.torch.view.main.appointment
 
+import android.annotation.SuppressLint
 import android.app.ProgressDialog
 import android.content.Intent
 import android.graphics.Color
@@ -21,13 +22,14 @@ class TeaInfoActivity : AppCompatActivity() {
     private val dark = Color.parseColor("#808080")
     private val red = Color.parseColor("#DD7049")
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tea_info)
         progressDialog = ProgressDialog.show(this@TeaInfoActivity, "正在加载", "请等待")
         teacher = intent.getSerializableExtra("teacher") as Teacher
         tea_info_name.text = teacher.name
-        tea_info_price.text = ""+teacher.price
+        tea_info_price.text = "" + teacher.price
         Glide.with(this@TeaInfoActivity).load(teacher.head).into(tea_info_circleImage)
         showIntroduce()
         tea_info_introduceLayout.setOnClickListener {
@@ -105,7 +107,7 @@ class TeaInfoActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        if (progressDialog.isShowing){
+        if (progressDialog.isShowing) {
             progressDialog.dismiss()
         }
         super.onDestroy()

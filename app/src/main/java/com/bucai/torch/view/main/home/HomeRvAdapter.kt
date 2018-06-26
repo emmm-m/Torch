@@ -1,5 +1,7 @@
 package com.bucai.torch.view.main.home
 
+import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -23,11 +25,6 @@ import com.bucai.torch.util.leancloud.GetDataModel
 import com.bucai.torch.util.leancloud.IGetDataModel
 import com.bucai.torch.util.leancloud.MessageModel
 import com.bucai.torch.util.network.HttpUtil
-import com.bucai.torch.bean.Teacher
-import com.bucai.torch.util.ThreadPool
-import com.bucai.torch.util.model.GetDataModel
-import com.bucai.torch.util.model.IGetDataModel
-import com.bucai.torch.util.model.MessageModel
 import com.bucai.torch.view.message.MessageActivity
 import com.bucai.torch.view.teacher.TeacherDetailActivity
 import com.bumptech.glide.Glide
@@ -168,6 +165,7 @@ class HomeRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 holder.star.text = getStar(lecturer.star)
                 holder.name.text = lecturer.teaName
                 holder.price.text = "${lecturer.price}元"
+                holder.introduce.text = lecturer.simpleIntroduce
                 Glide.with(holder.itemView.context).load(lecturer.head).into(holder.head)
                 holder.itemView.setOnClickListener {
                     val intent = Intent(holder.itemView.context, TeacherDetailActivity::class.java)
@@ -212,6 +210,7 @@ class HomeRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     class NormalHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val head = itemView.findViewById<ImageView>(R.id.item_home_rv_normal_imageView)
+        val introduce = itemView.findViewById<TextView>(R.id.item_home_rv_normal_introduce)
         val name = itemView.findViewById<TextView>(R.id.item_home_rv_normal_name)
         val location = itemView.findViewById<TextView>(R.id.item_home_rv_normal_address)
         val price = itemView.findViewById<TextView>(R.id.item_home_rv_normal_price)

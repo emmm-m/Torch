@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVFile;
+import com.avos.avoscloud.AVGeoPoint;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.AVUser;
@@ -91,7 +92,9 @@ public class GetDataModel implements IGetDataModel {
         lecturer.setSimpleIntroduce(avObject.getString("simpleIntroduce"));
         lecturer.setStar(avObject.getInt("star"));
         lecturer.setTeaName(avObject.getString("teaName"));
-        lecturer.setLocation(avObject.getAVGeoPoint("location"));
+        AVGeoPoint avGeoPoint = avObject.getAVGeoPoint("location");
+        lecturer.setLatitude(avGeoPoint.getLatitude());
+        lecturer.setLongtitude(avGeoPoint.getLongitude());
         lecturer.setPrice(avObject.getInt("price"));
         AVFile head = avObject.getAVFile("header");
         if (head != null) {
@@ -388,7 +391,7 @@ public class GetDataModel implements IGetDataModel {
         }
         teacher.setName((String) avObject.get("name"));
         teacher.setPhone((String) avObject.get("phone"));
-        teacher.setPrice((Integer) avObject.get("price"));
+        teacher.setPrice(String.valueOf(avObject.getInt("price")));
         teacher.setSex((String) avObject.get("sex"));
         teacher.setStar((int) avObject.get("star"));
         teacher.setYear((int) avObject.get("year"));
