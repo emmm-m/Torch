@@ -9,10 +9,13 @@ import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.FindCallback;
 import com.avos.avoscloud.GetCallback;
+import com.bucai.torch.bean.Comment;
 import com.bucai.torch.bean.FreeTime;
+import com.bucai.torch.bean.Lecturer;
 import com.bucai.torch.bean.Teacher;
 import com.bucai.torch.util.ThreadPool;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -50,6 +53,77 @@ public class GetDataModel implements IGetDataModel {
 //            }
 //        });
 //    }
+
+    public void getLecturerList(final GetDataListener<Lecturer> getDataListener) {
+        getDataListener.onStart();
+        AVQuery<AVObject> query = new AVQuery<>("Lecturer");
+        query.findInBackground(new FindCallback<AVObject>() {
+            @Override
+            public void done(final List<AVObject> list, AVException e) {
+                if (e != null) {
+                    getDataListener.onError(e);
+                } else {
+                    ThreadPool.instance.getSingleThreadExecutor().execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            List<Lecturer> lecturers = new ArrayList<>();
+                            for (AVObject avObject : list) {
+                                try {
+                                    lecturers.add(convertLecturer(avObject));
+                                } catch (AVException e1) {
+                                    e1.printStackTrace();
+                                    getDataListener.onError(e1);
+                                } catch (FileNotFoundException e1) {
+                                    e1.printStackTrace();
+                                }
+                            }
+                            getDataListener.onFinish(lecturers);
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+    private Lecturer convertLecturer(AVObject avObject) throws AVException, FileNotFoundException {
+        Lecturer lecturer = new Lecturer();
+        lecturer.setObjectId(avObject.getObjectId());
+        lecturer.setSimpleIntroduce(avObject.getString("simpleIntroduce"));
+        lecturer.setStar(avObject.getInt("star"));
+        lecturer.setTeaName(avObject.getString("teaName"));
+        lecturer.setLocation(avObject.getAVGeoPoint("location"));
+        lecturer.setPrice(avObject.getInt("price"));
+        AVFile head = avObject.getAVFile("header");
+        if (head != null) {
+            lecturer.setHead(AVFile.withObjectId(head.getObjectId()).getUrl());
+        }
+        return lecturer;
+    }
+
+    public Lecturer getLectureDetail(Lecturer lecturer) throws AVException {
+        AVQuery avQuery = new AVQuery("Lecturer");
+        AVObject avObject = avQuery.get(lecturer.getObjectId());
+        lecturer.setStudentCount(avObject.getInt("studentCount"));
+        lecturer.setSuccessCase(avObject.getList("successCase"));
+        lecturer.setExperience(avObject.getString("experience"));
+        lecturer.setGoodCommentCount(avObject.getInt("goodCommentCount"));
+        lecturer.setCommentGroup(avObject.getList("commentGroup"));
+        lecturer.setDescription(avObject.getList("description"));
+        lecturer.setCompleteIntroduce(avObject.getString("completeIntroduce"));
+        lecturer.setSimpleComment(avObject.getString("simpleComment"));
+        return lecturer;
+    }
+
+    public Lecturer getLecturerComment(Lecturer lecturer) throws AVException {
+        AVQuery avQuery = new AVQuery("Lecturer");
+        AVObject avObject = avQuery.get(lecturer.getObjectId());
+        String json = avObject.getString("completeComment");
+        Gson gson = new Gson();
+        List<Comment> comments = gson.fromJson(json, new TypeToken<List<Comment>>() {
+        }.getType());
+        lecturer.setCompleteComment(comments);
+        return lecturer;
+    }
 
     @Override
     public void getTeachersList(String content, final GetDataListener<AVObject> listener) {
