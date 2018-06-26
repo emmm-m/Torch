@@ -9,32 +9,56 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="@color/orange"
-        android:gravity="center"
+        android:text="我的"
+        android:background="@color/md_white_1000"
         android:paddingTop="20dp"
-        android:text="Torch"
-        android:textColor="@color/white"
-        android:textSize="@dimen/app_text_size_xxxlarge"
-        android:textStyle="italic|bold"/>
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textSize="@dimen/app_text_size_large"/>
 
-    <Button
-        android:id="@+id/mine_send"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="150dp"
+        android:background="@drawable/bg_mine_gradient">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="20dp"
+            android:id="@+id/header_mine"
+            android:src="@drawable/ic_header_default"/>
+
+        <TextView
+            android:textColor="@color/md_white_1000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:id="@+id/name_mine"
+            />
+
+
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="send" />
+        android:scaleType="centerInside"
+        android:adjustViewBounds="true"
+        android:src="@drawable/bg_mine"/>
+
     <Button
         android:id="@+id/btn_logout"
         android:layout_gravity="center"
-        android:layout_width="wrap_content"
+        android:background="@drawable/bg_mine_gradient"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="70dp"
+        android:textColor="@color/md_white_1000"
+        android:layout_marginRight="70dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="退出登录" />
 
-    <Button
-        android:id="@+id/mine_get"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="get" />
 
 </LinearLayout>
