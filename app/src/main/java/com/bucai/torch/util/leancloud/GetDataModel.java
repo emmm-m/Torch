@@ -13,6 +13,7 @@ import com.avos.avoscloud.GetCallback;
 import com.bucai.torch.bean.Comment;
 import com.bucai.torch.bean.FreeTime;
 import com.bucai.torch.bean.Lecturer;
+import com.bucai.torch.bean.News;
 import com.bucai.torch.bean.Teacher;
 import com.bucai.torch.util.ThreadPool;
 import com.google.gson.Gson;
@@ -359,14 +360,16 @@ public class GetDataModel implements IGetDataModel {
     }
 
     @Override
-    public String getImageUrl(String fileName) throws AVException, FileNotFoundException {
+    public News getImage(String fileName) throws AVException, FileNotFoundException {
         AVQuery<AVObject> avQuery = new AVQuery<>("ImageRes");
         avQuery.whereEqualTo("name", fileName);
         AVFile avFile = avQuery.find().get(0).getAVFile("file");
-        if (avFile == null) return "";
         String url = AVFile.withObjectId(avFile.getObjectId()).getUrl();
-        if (url == null) return "";
-        return url;
+        News news = new News();
+        news.setTittle(avQuery.find().get(0).getString("tittle"));
+        news.setUrl(avQuery.find().get(0).getString("url"));
+        news.setPicUrl(url);
+        return news;
     }
 
     @Override

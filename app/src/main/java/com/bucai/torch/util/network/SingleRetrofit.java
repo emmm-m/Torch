@@ -27,7 +27,7 @@ public class SingleRetrofit {
 
     private static class SingletonHolder {
         private static final Retrofit INSTANCE = new Retrofit.Builder()
-                .baseUrl(Apis.ZZZIA)
+                .baseUrl(Apis.BETTERZZX)
                 .client(new OkHttpClient().newBuilder()
                         .addInterceptor(new ResponseInterceptor())
                         .build())
