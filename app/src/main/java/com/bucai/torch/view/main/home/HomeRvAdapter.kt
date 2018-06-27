@@ -143,7 +143,7 @@ class HomeRvAdapter(val activity: Activity) : RecyclerView.Adapter<RecyclerView.
                         activity.startActivity(intent)
                         true
                     }
-                    false
+                    true
                 }
 
 
@@ -197,7 +197,7 @@ class HomeRvAdapter(val activity: Activity) : RecyclerView.Adapter<RecyclerView.
                     LogUtil.d("sortTest", "zzx")
                     lecturers.sortBy {
                         Math.sqrt(Math.pow(it.latitude - LocationUtils.getInstance(holder.itemView.context)!!.showLocation()!!.latitude, 2.0)
-                        + Math.pow(it.longtitude - LocationUtils.getInstance(holder.itemView.context)!!.showLocation()!!.longitude, 2.0))
+                        + Math.pow(it.longitude - LocationUtils.getInstance(holder.itemView.context)!!.showLocation()!!.longitude, 2.0))
                     }
                     freshLecturer(lecturers)
                 }
