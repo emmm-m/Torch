@@ -69,7 +69,7 @@ class TeaInfoActivity : AppCompatActivity() {
         tea_info_appointText.setTextColor(red)
         tea_info_introduceText.setTextColor(dark)
         tea_info_introduce_bottom.visibility = View.GONE
-        tea_info_classifyGroup.addStrings(getTimeList(), 4, R.drawable.tea_info_bg, 18f, Color.parseColor("#676666"))
+        tea_info_classifyGroup.addStrings(getTimeList(), 3, R.drawable.tea_info_bg, 18f, Color.parseColor("#676666"))
     }
 
     private fun getTimeList(): List<String> {

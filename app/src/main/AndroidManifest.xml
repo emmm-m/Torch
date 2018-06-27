@@ -61,6 +61,7 @@
         <activity
             android:name=".view.teacher.TeacherPriceActivity"
             android:theme="@style/Translucent" />
+        <activity android:name=".view.teacher.TeacherBuyActivity"></activity>
     </application>
 
 </manifest>

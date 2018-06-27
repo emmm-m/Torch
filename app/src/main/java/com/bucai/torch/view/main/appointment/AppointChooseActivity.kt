@@ -9,6 +9,7 @@ import com.bucai.torch.R
 import com.bucai.torch.bean.FreeTime
 import com.bucai.torch.bean.Teacher
 import com.bucai.torch.util.LogUtil
+import com.bucai.torch.util.uiutils.ClassifyGroup
 import com.bucai.torch.view.base.BaseActivity
 import com.zia.toastex.ToastEx
 import kotlinx.android.synthetic.main.activity_appoint_choose.*
@@ -161,14 +162,17 @@ class AppointChooseActivity : BaseActivity() {
     private fun setClassifyGroup(strings: List<String>) {
         LogUtil.e(strings.toString())
         appoint_choose_timeGroup.addStrings(strings, 3, R.drawable.appoint_choose_way_bg, 18f, orange)
-        appoint_choose_timeGroup.setItemClickListener(View.OnClickListener {
-            timeSelected?.setTextColor(orange)
-            timeSelected?.background = bg
-            timeSelected = it as TextView?
-            timeSelected?.background = sbg
-            timeSelected?.setTextColor(white)
-            time = timeSelected?.text.toString()
-            freshTv()
+        appoint_choose_timeGroup.setItemClickListener(object :ClassifyGroup.ItemClickListener {
+            override fun onClick(index: Int, view: View) {
+                timeSelected?.setTextColor(orange)
+                timeSelected?.background = bg
+                timeSelected = view as TextView?
+                timeSelected?.background = sbg
+                timeSelected?.setTextColor(white)
+                time = timeSelected?.text.toString()
+                freshTv()
+            }
+
         })
     }
 
