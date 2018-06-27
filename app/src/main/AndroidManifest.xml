@@ -31,18 +31,18 @@
         <activity
             android:name=".view.main.MainActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
-        <activity android:name=".view.EvaluatePrepareActivity"/>
-        <activity android:name=".view.WebActivity"/>
-        <activity android:name=".view.main.measurement.MeasureDetailActivity"/>
-        <activity android:name=".view.main.appointment.TeaInfoActivity"/>
-        <activity android:name=".view.login.LoginActivity"/>
-        <activity android:name=".view.CompleteActivity"/>
-        <activity android:name=".view.main.appointment.AppointChooseActivity"/>
-        <activity android:name=".view.main.appointment.AppointCompleteActivity"/>
-        <activity android:name=".view.message.MessageActivity"/>
-        <activity android:name=".view.message.ChatActivity"/>
-        <activity android:name=".view.PhotoActivity"/>
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+        <activity android:name=".view.EvaluatePrepareActivity" />
+        <activity android:name=".view.WebActivity" />
+        <activity android:name=".view.main.measurement.MeasureDetailActivity" />
+        <activity android:name=".view.main.appointment.TeaInfoActivity" />
+        <activity android:name=".view.login.LoginActivity" />
+        <activity android:name=".view.CompleteActivity" />
+        <activity android:name=".view.main.appointment.AppointChooseActivity" />
+        <activity android:name=".view.main.appointment.AppointCompleteActivity" />
+        <activity android:name=".view.message.MessageActivity" />
+        <activity android:name=".view.message.ChatActivity" />
+        <activity android:name=".view.PhotoActivity" />
 
         <!-- 实时通信模块、推送（均需要加入以下声明） START -->
         <!-- 实时通信模块、推送都要使用 PushService -->
@@ -60,6 +60,10 @@
         <activity android:name=".view.teacher.TeacherDetailActivity"/>
         <activity android:name=".view.main.searchresult.SearchResultActivity">
         </activity>
+        <activity
+            android:name=".view.teacher.TeacherPriceActivity"
+            android:theme="@style/Translucent" />
+        <activity android:name=".view.teacher.TeacherBuyActivity"></activity>
     </application>
 
 </manifest>

@@ -2,25 +2,34 @@ package com.bucai.torch.view.teacher
 
 import android.annotation.SuppressLint
 import android.app.ProgressDialog
+import android.content.Intent
 import android.graphics.Color
-import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import android.os.Build
+import android.view.WindowManager
 import com.bucai.torch.R
 import com.bucai.torch.bean.Lecturer
 import com.bucai.torch.util.ThreadPool
 import com.bucai.torch.util.getStar
 import com.bucai.torch.util.leancloud.GetDataModel
+import com.bucai.torch.view.base.BaseActivity
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_teacher_detail.*
 
-class TeacherDetailActivity : AppCompatActivity() {
+class TeacherDetailActivity : BaseActivity() {
 
     private lateinit var lecturer: Lecturer
 
+    override val contentViewId: Int = R.layout.activity_teacher_detail
+
+    override fun initState() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            //透明状态栏
+            window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
+    }
+
     @SuppressLint("SetTextI18n")
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_teacher_detail)
+    override fun initData() {
         lecturer = intent.getSerializableExtra("lecturer") as Lecturer
         Glide.with(this@TeacherDetailActivity).load(lecturer.head).into(teacher_detail_head)
         val progressDialog = ProgressDialog.show(this@TeacherDetailActivity, "正在加载", "请耐心等待")
@@ -41,6 +50,14 @@ class TeacherDetailActivity : AppCompatActivity() {
                         , R.drawable.tea_info_bg, 18f
                         , Color.parseColor("#9C9C9C"))
             }
+        }
+        teacher_detail_getHelp.setOnClickListener {
+
+        }
+        teacher_detail_buy.setOnClickListener {
+            val intent = Intent(this@TeacherDetailActivity, TeacherPriceActivity::class.java)
+            intent.putExtra("lecturer", lecturer)
+            startActivity(intent)
         }
     }
 }

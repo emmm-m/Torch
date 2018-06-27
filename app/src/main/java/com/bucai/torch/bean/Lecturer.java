@@ -10,6 +10,7 @@ public class Lecturer implements Serializable{
     private String objectId;
     private List<String> description;//教师的教学特点标签
     private List<String> commentGroup;//学生评价的标签
+    private List<String> grade;//教学年级
     private int studentCount;//交过的学生数量，单独分一栏来写死真的难看=_=
     private String simpleIntroduce;//1教师简单介绍 example: 教龄8年 | 已授536课
     private List<String> successCase;//成功案例
@@ -19,7 +20,7 @@ public class Lecturer implements Serializable{
     private String completeIntroduce;//完整介绍
     private String simpleComment;//简单评论
     private int goodCommentCount;//好评数
-    private double longtitude;
+    private double longitude;
     private double latitude;
     private int price;//价格1
     private String head;//头像1
@@ -32,6 +33,7 @@ public class Lecturer implements Serializable{
                 "objectId='" + objectId + '\'' +
                 ", description=" + description +
                 ", commentGroup=" + commentGroup +
+                ", grade=" + grade +
                 ", studentCount=" + studentCount +
                 ", simpleIntroduce='" + simpleIntroduce + '\'' +
                 ", successCase=" + successCase +
@@ -41,7 +43,7 @@ public class Lecturer implements Serializable{
                 ", completeIntroduce='" + completeIntroduce + '\'' +
                 ", simpleComment='" + simpleComment + '\'' +
                 ", goodCommentCount=" + goodCommentCount +
-                ", longtitude=" + longtitude +
+                ", longitude=" + longitude +
                 ", latitude=" + latitude +
                 ", price=" + price +
                 ", head='" + head + '\'' +
@@ -49,12 +51,20 @@ public class Lecturer implements Serializable{
                 '}';
     }
 
-    public double getLongtitude() {
-        return longtitude;
+    public List<String> getGrade() {
+        return grade;
     }
 
-    public void setLongtitude(double longtitude) {
-        this.longtitude = longtitude;
+    public void setGrade(List<String> grade) {
+        this.grade = grade;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 
     public double getLatitude() {
