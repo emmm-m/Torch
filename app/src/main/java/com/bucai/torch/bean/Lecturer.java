@@ -1,9 +1,6 @@
 package com.bucai.torch.bean;
 
-import com.avos.avoscloud.AVGeoPoint;
-
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -26,6 +23,7 @@ public class Lecturer implements Serializable{
     private double latitude;
     private int price;//价格1
     private String head;//头像1
+    private String address;//位置
     private List<Comment> completeComment;//完整的评论，序列化字符串
 
     @Override
@@ -187,4 +185,11 @@ public class Lecturer implements Serializable{
         this.price = price;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 }

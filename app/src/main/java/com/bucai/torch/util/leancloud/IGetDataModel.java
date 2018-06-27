@@ -3,6 +3,7 @@ package com.bucai.torch.util.leancloud;
 import com.avos.avoscloud.AVException;
 import com.avos.avoscloud.AVObject;
 import com.avos.avoscloud.AVUser;
+import com.bucai.torch.bean.Lecturer;
 import com.bucai.torch.bean.News;
 import com.bucai.torch.bean.Teacher;
 
@@ -13,7 +14,7 @@ import java.io.FileNotFoundException;
  */
 
 public interface IGetDataModel {
-    void getTeachersList(String content, final GetDataModel.GetDataListener<AVObject> listener);
+    void getTeachersList(String content, final GetDataModel.GetDataListener<Lecturer> listener);
     void gerUserData(String username, GetDataModel.GetDataListener<AVUser> listener);
     void getUserById(String id, final GetDataModel.GetObjectListener listener);
     void getObjectById(String id, final GetDataModel.GetObjectListener listener);

@@ -96,6 +96,7 @@ public class GetDataModel implements IGetDataModel {
         AVGeoPoint avGeoPoint = avObject.getAVGeoPoint("location");
         lecturer.setLatitude(avGeoPoint.getLatitude());
         lecturer.setLongtitude(avGeoPoint.getLongitude());
+        lecturer.setAddress(avObject.getString("locationName"));
         lecturer.setPrice(avObject.getInt("price"));
         AVFile head = avObject.getAVFile("header");
         if (head != null) {
@@ -130,23 +131,38 @@ public class GetDataModel implements IGetDataModel {
     }
 
     @Override
-    public void getTeachersList(String content, final GetDataListener<AVObject> listener) {
+    public void getTeachersList(String content, final GetDataListener<Lecturer> listener) {
         listener.onStart();
-        AVQuery<AVObject> query1 = new AVQuery<>("Teachers");
-        query1.whereContains("name", content);
-        AVQuery<AVObject> query2 = new AVQuery<>("Teachers");
-        query2.whereContains("subject", content);
-        AVQuery<AVObject> query3 = new AVQuery<>("Teachers");
+        AVQuery<AVObject> query1 = new AVQuery<>("Lecturer");
+        query1.whereContains("teaName", content);
+        AVQuery<AVObject> query2 = new AVQuery<>("Lecturer");
+        query2.whereContains("locationName", content);
+        AVQuery<AVObject> query3 = new AVQuery<>("Lecturer");
         query3.whereContains("grade", content);
         AVQuery<AVObject> query = AVQuery.or(Arrays.asList(query1, query2, query3));
         query.findInBackground(new FindCallback<AVObject>() {
             @Override
-            public void done(List<AVObject> list, AVException e) {
-                if (e == null) {
-                    listener.onFinish(list);
-                } else {
-                    Log.d("]]]", "done: " + e);
+            public void done(final List<AVObject> list, AVException e) {
+                if (e != null) {
                     listener.onError(e);
+                } else {
+                    ThreadPool.instance.getSingleThreadExecutor().execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            List<Lecturer> lecturers = new ArrayList<>();
+                            for (AVObject avObject : list) {
+                                try {
+                                    lecturers.add(convertLecturer(avObject));
+                                } catch (AVException e1) {
+                                    e1.printStackTrace();
+                                    listener.onError(e1);
+                                } catch (FileNotFoundException e1) {
+                                    e1.printStackTrace();
+                                }
+                            }
+                            listener.onFinish(lecturers);
+                        }
+                    });
                 }
             }
         });

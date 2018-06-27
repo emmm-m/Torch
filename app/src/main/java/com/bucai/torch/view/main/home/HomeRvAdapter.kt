@@ -8,8 +8,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.avos.avoscloud.AVException
 import com.avos.avoscloud.AVObject
@@ -19,7 +21,6 @@ import com.bucai.torch.R
 import com.bucai.torch.bean.Lecturer
 import com.bucai.torch.bean.Location
 import com.bucai.torch.bean.News
-import com.bucai.torch.bean.Teacher
 import com.bucai.torch.util.LocationUtils
 import com.bucai.torch.util.LogUtil
 import com.bucai.torch.util.ThreadPool
@@ -29,16 +30,19 @@ import com.bucai.torch.util.leancloud.IGetDataModel
 import com.bucai.torch.util.leancloud.MessageModel
 import com.bucai.torch.util.network.HttpUtil
 import com.bucai.torch.view.WebActivity
+import com.bucai.torch.view.main.searchresult.SearchResultActivity
 import com.bucai.torch.view.message.MessageActivity
 import com.bucai.torch.view.teacher.TeacherDetailActivity
 import com.bumptech.glide.Glide
 import com.jude.rollviewpager.RollPagerView
+import kotlinx.android.synthetic.main.item_home_rv_normal.view.*
 import rx.Subscriber
 
+@Suppress("UNUSED_EXPRESSION")
 /**
  * Created by zia on 2018/5/25.
  */
-class HomeRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class HomeRvAdapter(val activity: Activity) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val SEARCH = 0
     private val GALLARY = 1
@@ -132,6 +136,16 @@ class HomeRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                             }
                         })
 
+                holder.editText.setOnEditorActionListener { _, actionId, _ ->
+                    if (actionId == EditorInfo.IME_ACTION_SEARCH){
+                        val intent = Intent(activity, SearchResultActivity::class.java)
+                        intent.putExtra("content", holder.editText.text.toString())
+                        activity.startActivity(intent)
+                        true
+                    }
+                    false
+                }
+
 
                 holder.message.setOnClickListener {
                     holder.itemView.context.startActivity(Intent(holder.itemView.context, MessageActivity::class.java))
@@ -179,13 +193,31 @@ class HomeRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 }
             }
             is ClassifyHolder -> {
+                holder.sortLocation.setOnClickListener {
+                    LogUtil.d("sortTest", "zzx")
+                    lecturers.sortBy {
+                        Math.sqrt(Math.pow(it.latitude - LocationUtils.getInstance(holder.itemView.context)!!.showLocation()!!.latitude, 2.0)
+                        + Math.pow(it.longtitude - LocationUtils.getInstance(holder.itemView.context)!!.showLocation()!!.longitude, 2.0))
+                    }
+                    freshLecturer(lecturers)
+                }
 
+                holder.sortPrice.setOnClickListener {
+                    lecturers.sortBy { it.price }
+                    freshLecturer(lecturers)
+                }
+
+                holder.sortComment.setOnClickListener {
+                    lecturers.sortBy { it.star }
+                    freshLecturer(lecturers)
+                }
             }
             is NormalHolder -> {
                 val lecturer = lecturers[position - 4]
                 holder.star.text = getStar(lecturer.star)
                 holder.name.text = lecturer.teaName
                 holder.price.text = "${lecturer.price}元"
+                holder.location.text = lecturer.address
                 holder.introduce.text = lecturer.simpleIntroduce
                 Glide.with(holder.itemView.context).load(lecturer.head).into(holder.head)
                 holder.itemView.setOnClickListener {
@@ -197,19 +229,17 @@ class HomeRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
     }
 
-    override fun getItemCount(): Int {
-        return lecturers.size + 4
-    }
+    override fun getItemCount() =lecturers.size + 4
 
-    override fun getItemViewType(position: Int): Int {
+
+    override fun getItemViewType(position: Int) =
         when (position) {
-            0 -> return SEARCH
-            1 -> return GALLARY
-            2 -> return ADJUST
-            3 -> return CLASSIFY
+            0 ->  SEARCH
+            1 ->  GALLARY
+            2 ->  ADJUST
+            3 ->  CLASSIFY
+            else -> NORMAL
         }
-        return NORMAL
-    }
 
     class SearchHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var location: TextView = itemView.findViewById(R.id.item_home_rv_search_location)
@@ -227,10 +257,14 @@ class HomeRvAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         val rightImg = itemView.findViewById<ImageView>(R.id.item_home_rv_adjust_right)
     }
 
-    class ClassifyHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    class ClassifyHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val sortLocation = itemView.findViewById<LinearLayout>(R.id.sort_distance)
+        val sortComment = itemView.findViewById<LinearLayout>(R.id.sort_comment)
+        val sortPrice = itemView.findViewById<LinearLayout>(R.id.sort_price)
+    }
 
     class NormalHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val head = itemView.findViewById<ImageView>(R.id.item_home_rv_normal_imageView)
+        val head = itemView.item_home_rv_normal_imageView
         val introduce = itemView.findViewById<TextView>(R.id.item_home_rv_normal_introduce)
         val name = itemView.findViewById<TextView>(R.id.item_home_rv_normal_name)
         val location = itemView.findViewById<TextView>(R.id.item_home_rv_normal_address)

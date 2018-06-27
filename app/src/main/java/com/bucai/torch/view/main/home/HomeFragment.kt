@@ -32,7 +32,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = HomeRvAdapter()
+        adapter = HomeRvAdapter(activity!!)
         home_rv.adapter = adapter
         home_rv.layoutManager = LinearLayoutManager(context)
         GetDataModel().getLecturerList(object : GetDataModel.GetDataListener<Lecturer> {
