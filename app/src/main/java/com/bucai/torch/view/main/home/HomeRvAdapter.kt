@@ -116,25 +116,7 @@ class HomeRvAdapter(val activity: Activity) : RecyclerView.Adapter<RecyclerView.
 
                 })
                 val http = HttpUtil()
-                http.getCity(LocationUtils.getInstance(holder.itemView.context)!!.showLocation()!!.latitude,
-                        LocationUtils.getInstance(holder.itemView.context)!!.showLocation()!!.longitude)
-                        .subscribe(object : Subscriber<Location>() {
-                            override fun onNext(t: Location?) {
-                                holder.location.text = t!!.data.address_components[1].short_name
-                            }
 
-                            override fun onCompleted() {
-//                                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                            }
-
-                            override fun onError(e: Throwable?) {
-                                LogUtil.d("LocationError: ", e!!.message)
-                                LogUtil.d("LocationShow: ", "" + LocationUtils.getInstance(holder.itemView.context)!!.showLocation()!!.longitude
-                                        + " @@@ " + LocationUtils.getInstance(holder.itemView.context)!!.showLocation()!!.latitude)
-//                                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                                holder.location.text = "获取位置失败"
-                            }
-                        })
 
                 holder.editText.setOnEditorActionListener { _, actionId, _ ->
                     if (actionId == EditorInfo.IME_ACTION_SEARCH){
@@ -150,6 +132,26 @@ class HomeRvAdapter(val activity: Activity) : RecyclerView.Adapter<RecyclerView.
                 holder.message.setOnClickListener {
                     holder.itemView.context.startActivity(Intent(holder.itemView.context, MessageActivity::class.java))
                 }
+
+                http.getCity(LocationUtils.getInstance(holder.itemView.context)!!.getLatitude()!!,
+                        LocationUtils.getInstance(holder.itemView.context)!!.getLongitude()!!)
+                        .subscribe(object : Subscriber<Location>() {
+                            override fun onNext(t: Location?) {
+                                holder.location.text = t!!.data.address_components[1].short_name
+                            }
+
+                            override fun onCompleted() {
+//                                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                            }
+
+                            override fun onError(e: Throwable?) {
+                                LogUtil.d("LocationError: ", e!!.message)
+                                LogUtil.d("LocationShow: ", "" + LocationUtils.getInstance(holder.itemView.context)!!.getLongitude()
+                                        + " @@@ " + LocationUtils.getInstance(holder.itemView.context)!!.getLatitude())
+//                                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                                holder.location.text = "获取位置失败"
+                            }
+                        })
             }
             is GallaryHolder -> {
                 getDataModel.getRollPics(object : GetDataModel.GetDataListener<AVObject> {
@@ -196,8 +198,8 @@ class HomeRvAdapter(val activity: Activity) : RecyclerView.Adapter<RecyclerView.
                 holder.sortLocation.setOnClickListener {
                     LogUtil.d("sortTest", "zzx")
                     lecturers.sortBy {
-                        Math.sqrt(Math.pow(it.latitude - LocationUtils.getInstance(holder.itemView.context)!!.showLocation()!!.latitude, 2.0)
-                        + Math.pow(it.longitude - LocationUtils.getInstance(holder.itemView.context)!!.showLocation()!!.longitude, 2.0))
+                        Math.sqrt(Math.pow(it.latitude - LocationUtils.getInstance(holder.itemView.context)!!.getLatitude()!!, 2.0)
+                        + Math.pow(it.longitude - LocationUtils.getInstance(holder.itemView.context)!!.getLongitude()!!, 2.0))
                     }
                     freshLecturer(lecturers)
                 }

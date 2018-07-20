@@ -23,6 +23,7 @@ class TeacherPriceActivity : BaseActivity() {
     private var lastDiscount: TextView? = null
     private var grade = ""
     private var price = 0
+    private var classCount = 0
     private var discount = 0.0f
     private var totalPrice = 0
     private val textColor = Color.parseColor("#9C9C9C")
@@ -66,18 +67,22 @@ class TeacherPriceActivity : BaseActivity() {
                     0 -> {
                         this@TeacherPriceActivity.discount = 1 - 4 / 56f
                         totalPrice = price * 52
+                        classCount = 52
                     }
                     1 -> {
                         this@TeacherPriceActivity.discount = 1 - 8 / 96f
                         totalPrice = price * 88
+                        classCount = 88
                     }
                     2 -> {
                         this@TeacherPriceActivity.discount = 1 - 12 / 136f
                         totalPrice = price * 124
+                        classCount = 124
                     }
                     else -> {
                         this@TeacherPriceActivity.discount = 1f
                         totalPrice = price
+                        classCount = 1
                     }
                 }
                 change(lastDiscount, view as TextView)
@@ -91,6 +96,8 @@ class TeacherPriceActivity : BaseActivity() {
             }
             val intent = Intent(this@TeacherPriceActivity, TeacherBuyActivity::class.java)
             intent.putExtra("totalPrice", totalPrice)
+            intent.putExtra("classCount", classCount)
+            intent.putExtra("objectId", lecturer.objectId)
             startActivity(intent)
         }
     }

@@ -13,6 +13,7 @@ import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.FollowCallback;
 import com.avos.avoscloud.LogInCallback;
 import com.avos.avoscloud.RequestMobileCodeCallback;
+import com.avos.avoscloud.SaveCallback;
 import com.avos.avoscloud.SignUpCallback;
 import com.bucai.torch.view.main.MainActivity;
 
@@ -34,10 +35,12 @@ public class UserModel implements IUserModel {
 
     @Override
     public void login(String username, String password, final UserListener listener) {
-        AVUser.logInInBackground(username, password, new LogInCallback<AVUser>() {
+        AVUser.loginByMobilePhoneNumberInBackground(username, password, new LogInCallback<AVUser>() {
             @Override
             public void done(AVUser avUser, AVException e) {
                 if (e == null) {
+                    Log.e("login",avUser.getObjectId());
+                    Log.e("login",avUser.getUsername());
                     listener.onSuccess();
                 } else {
                     listener.onError(e);
@@ -89,17 +92,28 @@ public class UserModel implements IUserModel {
     }
 
     @Override
-    public void signUpWithPhone(String phone, String code, final String password, final UserListener listener) {
+    public void signUpWithPhone(final String phone, final String code, final String password, final UserListener listener) {
         AVUser.signUpOrLoginByMobilePhoneInBackground(phone, code, new LogInCallback<AVUser>() {
             @Override
             public void done(AVUser avUser, AVException e) {
-
                 if (e == null) {
-                    listener.onSuccess();
+                    Log.e("sign",avUser.getObjectId());
+                    Log.e("sign",avUser.getUsername());
                     avUser.setPassword(password);
-                    avUser.saveInBackground();
+                    avUser.saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(AVException e) {
+                            AVUser.loginByMobilePhoneNumberInBackground(phone, password, new LogInCallback<AVUser>() {
+                                @Override
+                                public void done(AVUser avUser, AVException e) {
+                                    if (e == null) listener.onSuccess();
+                                    else listener.onError(e);
+                                }
+                            });
+                        }
+                    });
                 } else {
-                    Log.d("zzxsign", "done: "+ e.toString());
+                    Log.d("zzxsign", "done: " + e.toString());
                     listener.onError(e);
                 }
             }
@@ -113,31 +127,32 @@ public class UserModel implements IUserModel {
     }
 
     @Override
-    public void setInfo(String nickname, int age, Bitmap header, final UserListener listener) {
-        AVUser user = AVUser.getCurrentUser();
-        user.put("nickname", nickname);
-        user.put("age", age);
-        String iconPath = saveBitmap(header, MainActivity.Companion.getUSER());
-        Log.d("zzzx", "signUp: " + iconPath);
-        AVFile avFile = null;
-        try {
-            avFile = AVFile.withAbsoluteLocalPath(MainActivity.Companion.getUSER(), iconPath);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        }
-        if (avFile != null) user.put("head", avFile);
-        user.signUpInBackground(new SignUpCallback() {
-            @Override
-            public void done(AVException e) {
-                if (e == null) {
-                    listener.onSuccess();
-                } else {
-                    listener.onError(e);
+    public void setInfo(final String nickname, final int age, final Bitmap header, final UserListener listener) {
+        final AVUser user = AVUser.getCurrentUser();
+                user.put("nickname", nickname);
+                user.put("age", age);
+                String iconPath = saveBitmap(header, MainActivity.Companion.getUSER());
+                Log.d("zzzx", "signUp: " + iconPath);
+                AVFile avFile = null;
+                try {
+                    avFile = AVFile.withAbsoluteLocalPath(MainActivity.Companion.getUSER(), iconPath);
+                } catch (FileNotFoundException e1) {
+                    e1.printStackTrace();
+                } catch (NullPointerException e1) {
+                    e1.printStackTrace();
                 }
-            }
-        });
+                if (avFile != null) user.put("head", avFile);
+                user.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(AVException e) {
+                        if (e == null) {
+                            listener.onSuccess();
+                        } else {
+                            listener.onError(e);
+                        }
+                    }
+                });
+
     }
 
     @Override

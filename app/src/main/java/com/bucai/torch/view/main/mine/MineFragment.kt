@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import com.avos.avoscloud.AVFile
 import com.avos.avoscloud.AVUser
 import com.bucai.torch.R
+import com.bucai.torch.view.CompleteActivity
 import com.bucai.torch.view.login.LoginActivity
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_mine.*
@@ -28,12 +29,19 @@ class MineFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         if (AVUser.getCurrentUser().get("header") != null) {
-            val header = AVUser.getCurrentUser().get("header") as AVFile
+            val header = AVUser.getCurrentUser().get("head") as AVFile
             Glide.with(context).load(header.url).crossFade().into(header_mine)
         } else {
             header_mine.setImageResource(R.drawable.ic_header_default)
         }
-        name_mine.text = AVUser.getCurrentUser().get("nickname").toString()
+        if (AVUser.getCurrentUser().get("nickname") != null)
+            name_mine.text = AVUser.getCurrentUser().get("nickname").toString()
+
+        header_mine.setOnClickListener {
+            if (AVUser.getCurrentUser().get("nickname") == null) {
+                startActivity(Intent(context, CompleteActivity::class.java))
+            }
+        }
 
         btn_logout.setOnClickListener {
             AVUser.logOut()

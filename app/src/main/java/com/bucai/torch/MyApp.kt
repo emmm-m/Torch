@@ -14,6 +14,7 @@ class MyApp : MultiDexApplication(){
         super.onCreate()
         AVOSCloud.initialize(this, Apis.LeanCloudId, Apis.LeanCloudKey)
         AVOSCloud.setDebugLogEnabled(true)
+
     }
 
 }

@@ -201,4 +201,20 @@ public class UpLoadModel implements IUpLoadModel {
         });
     }
 
+    @Override
+    public void uploadOrderInfo(String teacherId, int totalPrice, int classCount, final UpLoadListener listener) {
+        listener.onStart();
+        AVObject order = new AVObject("order");
+        order.put("teacher", teacherId);
+        order.put("totalPrice", totalPrice);
+        order.put("classCount", classCount);
+        order.put("customer", AVUser.getCurrentUser().getUsername());
+        order.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(AVException e) {
+                if (e == null) listener.onFinish();
+            }
+        });
+    }
+
 }

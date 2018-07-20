@@ -1,6 +1,7 @@
 package com.bucai.torch.view.login
 
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -26,6 +27,7 @@ import kotlinx.android.synthetic.main.fragment_signin.*
 class SignFragment : Fragment() {
     val model: IUserModel = UserModel()
     private var counter: CountDownTimer? = null
+    private var dialog: ProgressDialog? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -35,6 +37,7 @@ class SignFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        dialog = ProgressDialog(context)
         setSign()
         setGetCode()
     }
@@ -53,15 +56,19 @@ class SignFragment : Fragment() {
                 toast("请同意协议")
                 return@setOnClickListener
             }
+            showDialog()
             model.signUpWithPhone(edit_phone_sign.text.toString(), edit_verification_sign.text.toString(),
                     edit_password_sign.text.toString(), object : UserModel.UserListener {
                 override fun onSuccess() {
+                    hideDialog()
                     startActivity(Intent(activity, MainActivity::class.java))
                     activity!!.finish()
 //                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                 }
 
                 override fun onError(e: AVException?) {
+                    e?.printStackTrace()
+                    hideDialog()
 //                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                 }
 
@@ -81,6 +88,7 @@ class SignFragment : Fragment() {
                 }
 
                 override fun onError(e: AVException?) {
+                    e?.printStackTrace()
 //                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                 }
 
@@ -110,5 +118,18 @@ class SignFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         if (counter != null) counter!!.cancel()
+    }
+
+    private fun showDialog() {
+        dialog!!.setProgressStyle(ProgressDialog.STYLE_SPINNER)// 设置进度条的形式为圆形转动的进度条
+        dialog!!.setCancelable(true)// 设置是否可以通过点击Back键取消
+        dialog!!.setCanceledOnTouchOutside(true)// 设置在点击Dialog外是否取消Dialog进度条
+        dialog!!.setTitle("正在注册")
+        dialog!!.setMessage("稍等")
+        dialog!!.show()
+    }
+
+    fun hideDialog() {
+        dialog!!.dismiss()
     }
 }

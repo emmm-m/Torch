@@ -11,6 +11,7 @@ import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.util.Log
+import com.zia.toastex.ToastEx
 
 @Suppress("DEPRECATED_IDENTITY_EQUALS")
 /**
@@ -110,9 +111,22 @@ class LocationUtils private constructor(private val mContext: Context) {
         Log.d(TAG, address)
     }
 
-    //获取经纬度
-    fun showLocation(): Location? {
-        return location
+    //获取经度
+    fun getLatitude(): Double? {
+        if (location == null) {
+            ToastEx.error(mContext, "请打开GPS功能")
+            return 0.00
+        }
+        return location!!.latitude
+    }
+
+    //获取经度
+    fun getLongitude(): Double? {
+        if (location == null) {
+            ToastEx.error(mContext, "请打开GPS功能")
+            return 0.00
+        }
+        return location!!.longitude
     }
 
     // 移除定位监听

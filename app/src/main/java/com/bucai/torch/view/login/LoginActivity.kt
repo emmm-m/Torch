@@ -25,7 +25,7 @@ class LoginActivity : BaseActivity() {
         switch()
     }
 
-    private fun switch() {
+    fun switch() {
         when (isLogin) {
             true -> {
                 val fragmentManager = supportFragmentManager

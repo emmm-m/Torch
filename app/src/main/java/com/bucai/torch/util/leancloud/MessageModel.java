@@ -265,6 +265,8 @@ public class MessageModel extends AVIMMessageHandler implements IMessageModel {
      */
     private void openClient() {
         // Tom 用自己的名字作为clientId，获取AVIMClient对象实例
+
+        Log.d("zzxuserTest", "openClient: "+AVUser.getCurrentUser());
         self = AVIMClient.getInstance(AVUser.getCurrentUser().getUsername());
         // 与服务器连接
         self.open(new AVIMClientCallback() {

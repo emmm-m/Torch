@@ -1,12 +1,15 @@
 package com.bucai.torch.view
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.provider.MediaStore
+import android.util.Log
 import com.avos.avoscloud.AVException
+import com.avos.avoscloud.AVUser
 import com.bucai.torch.R
 import com.bucai.torch.util.leancloud.IUserModel
 import com.bucai.torch.util.leancloud.UserModel
@@ -21,10 +24,13 @@ class CompleteActivity : BaseActivity() {
     private val GET_IMAGE = 1
     private val GET_FIXED_IMAGE = 2
     private var image: Bitmap? = null
-
+    private var dialog : ProgressDialog? = null
     override val contentViewId: Int = R.layout.activity_complete
 
     override fun initData() {
+        Log.e("initData", AVUser.getCurrentUser().getObjectId())
+        Log.e("initData", AVUser.getCurrentUser().getUsername())
+        dialog = ProgressDialog(this)
         image = BitmapFactory.decodeResource(resources, R.drawable.ic_header_default)
         setHeader()
         btn_confirm.setOnClickListener {
@@ -36,13 +42,16 @@ class CompleteActivity : BaseActivity() {
                 toast("年龄不能为空")
                 return@setOnClickListener
             }
-            model.setInfo(edit_nickname.text.toString(), edit_age.text.toString().toInt(), image, object : UserModel.UserListener{
+            showDialog()
+            model.setInfo(edit_nickname.text.toString(), edit_age.text.toString().toInt(), image, object : UserModel.UserListener {
                 override fun onSuccess() {
+                    hideDialog()
                     finish()
                 }
 
                 override fun onError(e: AVException?) {
-                     log(e.toString())
+                    hideDialog()
+                    e?.printStackTrace()
                 }
 
             })
@@ -105,5 +114,18 @@ class CompleteActivity : BaseActivity() {
 
     override fun onBackPressed() {
 //        super.onBackPressed()
+    }
+
+    private fun showDialog() {
+        dialog!!.setProgressStyle(ProgressDialog.STYLE_SPINNER)// 设置进度条的形式为圆形转动的进度条
+        dialog!!.setCancelable(true)// 设置是否可以通过点击Back键取消
+        dialog!!.setCanceledOnTouchOutside(true)// 设置在点击Dialog外是否取消Dialog进度条
+        dialog!!.setTitle("正在上传")
+        dialog!!.setMessage("稍等")
+        dialog!!.show()
+    }
+
+    fun hideDialog() {
+        dialog!!.dismiss()
     }
 }
